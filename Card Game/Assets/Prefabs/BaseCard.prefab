@@ -318,10 +318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07831dd034222242b9bf621aa77946e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardNameText: {fileID: 6894055798161975852}
-  _cardStrengthText: {fileID: 6981204317034799263}
-  _cardName: 
-  _CardStrength: 0
+  cardNameText: {fileID: 6894055798161975852}
+  cardStrengthText: {fileID: 6981204317034799263}
+  cardName: 
+  cardStrength: 0
 --- !u!1 &6868922804886216903
 GameObject:
   m_ObjectHideFlags: 0

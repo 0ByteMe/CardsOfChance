@@ -56,8 +56,16 @@ PrefabInstance:
       value: Card_Archer
       objectReference: {fileID: 0}
     - target: {fileID: 4832386455101783039, guid: b121188914f7825419e0db794a797dc3, type: 3}
+      propertyPath: cardName
+      value: Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832386455101783039, guid: b121188914f7825419e0db794a797dc3, type: 3}
       propertyPath: _cardName
       value: Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832386455101783039, guid: b121188914f7825419e0db794a797dc3, type: 3}
+      propertyPath: cardStrength
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4832386455101783039, guid: b121188914f7825419e0db794a797dc3, type: 3}
       propertyPath: _CardStrength
