@@ -7,8 +7,8 @@ using System.Linq;
 public class CardSpawner : MonoBehaviour
 {
     [Header("Card Deck Prefabs")]
-    [SerializeField] private GameObject[] playerCardPrefabs;
-    [SerializeField] private GameObject[] enemyCardPrefabs;
+    [SerializeField] private List<Card> playerCardPrefabs;
+    [SerializeField] private List<Card> enemyCardPrefabs;
     
     [Header("Deck Locations")]
     [SerializeField] public Transform playerDeckLocation;
@@ -30,25 +30,25 @@ public class CardSpawner : MonoBehaviour
     
     private void InstantiateCardDecks()
     {
-        foreach (GameObject prefab in playerCardPrefabs)
+        foreach (Card prefab in playerCardPrefabs)
         {
-           GameObject newPlayerCard = Instantiate(prefab, playerDeckLocation.position, Quaternion.Euler(-90, -90, -90));
+           Card newPlayerCard = Instantiate(prefab, playerDeckLocation.position, Quaternion.Euler(-90, -90, -90));
            cardDecks.playerCards.Add(newPlayerCard);
         }
 
-        foreach (GameObject prefab in enemyCardPrefabs)
+        foreach (Card prefab in enemyCardPrefabs)
         {
-            GameObject newEnemyCard = Instantiate(prefab, enemyDeckLocation.position, Quaternion.Euler(-90, -90, -90));
+            Card newEnemyCard = Instantiate(prefab, enemyDeckLocation.position, Quaternion.Euler(-90, -90, -90));
             cardDecks.enemyCards.Add(newEnemyCard);
         }
     }
 
     private void ShuffleCardDecks()
     {
-        cardDecks.shuffledPlayerCards = new List<GameObject>();
+        cardDecks.shuffledPlayerCards = new List<Card>();
         cardDecks.shuffledPlayerCards = cardDecks.playerCards.OrderBy(x => Random.value).ToList();
 
-        cardDecks.shuffledEnemyCards = new List<GameObject>();
+        cardDecks.shuffledEnemyCards = new List<Card>();
         cardDecks.shuffledEnemyCards = cardDecks.enemyCards.OrderBy(x => Random.value).ToList();
     }
 }

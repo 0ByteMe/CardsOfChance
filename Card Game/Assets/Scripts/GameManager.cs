@@ -22,12 +22,14 @@ public class GameManager : MonoBehaviour
     
     ScoreManager scoreManager;
     CardDecks cardDecks;
+    CardBattler cardBattler;
 
 
     private void Awake()
     {        
         scoreManager = GetComponent<ScoreManager>();
         cardDecks = GetComponent<CardDecks>();
+        cardBattler = GetComponent<CardBattler>();
     }
 
     private void Start()
@@ -41,8 +43,10 @@ public class GameManager : MonoBehaviour
         {
             DrawPlayerCards();
             DrawEnemyCards();
+            cardBattler.CardBattle();            
         }
     }
+
     private void DrawPlayerCards()
     {
         buttonCanClick = false;
@@ -73,9 +77,10 @@ public class GameManager : MonoBehaviour
 
         cardDecks.AddToCurrentBattleCards(cardDecks.playerBattleCards, cardDecks.shuffledPlayerCards[0], cardDecks.shuffledPlayerCards[1], cardDecks.shuffledPlayerCards[2]);
 
-        StartCoroutine(cardDecks.RemoveDrawnPlayerCards());
+        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledPlayerCards));
         StartCoroutine(PauseBeforeClicking());
     }
+
     private void DrawEnemyCards()
     {
         System.Action<ITween<Vector3>> updateEnemyCard1Pos = (t) =>
@@ -98,12 +103,18 @@ public class GameManager : MonoBehaviour
         };
         TweenFactory.Tween(null, cardDecks.shuffledEnemyCards[2].transform.position,  enemyCard3Transform.position, card3Duration, TweenScaleFunctions.CubicEaseIn, updateEnemyCard3Pos);
 
-        StartCoroutine(cardDecks.RemoveDrawnEnemyCards());
+        cardDecks.AddToCurrentBattleCards(cardDecks.enemyBattleCards, cardDecks.shuffledEnemyCards[0], cardDecks.shuffledEnemyCards[1], cardDecks.shuffledEnemyCards[2]);
+
+        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards));
         StartCoroutine(PauseBeforeClicking());
     }
+    
+    
+
+
     private IEnumerator PauseBeforeClicking()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         buttonCanClick = true;
     }
