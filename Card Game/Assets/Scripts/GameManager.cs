@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
         };
         TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[0].transform.position, playerCard1Transform.position, card1Duration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard1Pos);
 
-        //cardDecks.playerBattleCards.A
 
         //Moves card at index 1 of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard2Pos = (t) =>
@@ -63,12 +62,16 @@ public class GameManager : MonoBehaviour
         };
         TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[1].transform.position, playerCard2Transform.position, card2Duration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard2Pos);
 
+
         //Moves card at index 2 of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard3Pos = (t) =>
         {
             cardDecks.shuffledPlayerCards[2].transform.position = t.CurrentValue;
         };
         TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[2].transform.position, playerCard3Transform.position, card3Duration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard3Pos);
+
+
+        cardDecks.AddToCurrentBattleCards(cardDecks.playerBattleCards, cardDecks.shuffledPlayerCards[0], cardDecks.shuffledPlayerCards[1], cardDecks.shuffledPlayerCards[2]);
 
         StartCoroutine(cardDecks.RemoveDrawnPlayerCards());
         StartCoroutine(PauseBeforeClicking());
