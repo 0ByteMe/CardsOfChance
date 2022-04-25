@@ -8,8 +8,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private int playerScore;
     [SerializeField] private int enemyScore;
 
-    [SerializeField] TextMeshPro playerScoreText;
-    [SerializeField] TextMeshPro enemyScoreText;
+    [SerializeField] TextMeshProUGUI playerScoreText;
+    [SerializeField] TextMeshProUGUI enemyScoreText;
 
 
     private void Start()

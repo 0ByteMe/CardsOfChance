@@ -1616,8 +1616,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScore: 0
   enemyScore: 0
-  playerScoreText: {fileID: 0}
-  enemyScoreText: {fileID: 0}
+  playerScoreText: {fileID: 361230555}
+  enemyScoreText: {fileID: 397702141}
 --- !u!1 &987067177
 GameObject:
   m_ObjectHideFlags: 0
