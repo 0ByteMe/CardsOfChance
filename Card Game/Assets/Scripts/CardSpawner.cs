@@ -25,18 +25,18 @@ public class CardSpawner : MonoBehaviour
         ShuffleCardDecks();
     }
 
-    //Quaternion.Euler(-90, -90, -90) working angle, changing it for looks in video temporarily
+    
     private void InstantiateCardDecks()
     {
         foreach (GameObject prefab in playerCardPrefabs)
         {
-           GameObject newPlayerCard = Instantiate(prefab, playerDeckLocation.position, Quaternion.Euler(90, -90, -90));
-            playerCards.Add(newPlayerCard);
+           GameObject newPlayerCard = Instantiate(prefab, playerDeckLocation.position, Quaternion.Euler(-90, -90, -90));
+           playerCards.Add(newPlayerCard);
         }
 
         foreach (GameObject prefab in enemyCardPrefabs)
         {
-            GameObject newEnemyCard = Instantiate(prefab, enemyDeckLocation.position, Quaternion.Euler(90, -90, -90));
+            GameObject newEnemyCard = Instantiate(prefab, enemyDeckLocation.position, Quaternion.Euler(-90, -90, -90));
             enemyCards.Add(newEnemyCard);
         }
     }

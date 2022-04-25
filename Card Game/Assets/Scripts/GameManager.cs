@@ -42,26 +42,25 @@ public class GameManager : MonoBehaviour
             DrawEnemyCards();
         }
     }
-
     private void DrawPlayerCards()
     {
         buttonCanClick = false;
 
-        //Tween/Move card at index 0 of Shuffled List to Card Play Position
+        //Moves card at index 0 of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard1Pos = (t) =>
         {
             cardSpawner.shuffledPlayerCards[0].transform.position = t.CurrentValue;
         };
         TweenFactory.Tween(null, cardSpawner.shuffledPlayerCards[0].transform.position, _playerCard1Transform.position, card1Duration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard1Pos);
 
-        //Tween/Move card at index 0 of Shuffled List to Card Play Position
+        //Moves card at index 1 of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard2Pos = (t) =>
         {
             cardSpawner.shuffledPlayerCards[1].transform.position = t.CurrentValue;
         };
         TweenFactory.Tween(null, cardSpawner.shuffledPlayerCards[1].transform.position, _playerCard2Transform.position, card2Duration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard2Pos);
 
-        //Tween/Move card at index 2 of Shuffled List to Card Play Position
+        //Moves card at index 2 of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard3Pos = (t) =>
         {
             cardSpawner.shuffledPlayerCards[2].transform.position = t.CurrentValue;
@@ -102,14 +101,12 @@ public class GameManager : MonoBehaviour
 
         buttonCanClick = true;
     }
-
     private void RemoveDrawnPlayerCards()
     {
         cardSpawner.shuffledPlayerCards.RemoveAt(0);
         cardSpawner.shuffledPlayerCards.RemoveAt(0);
         cardSpawner.shuffledPlayerCards.RemoveAt(0);
     }    
-
     private void RemoveDrawnEnemyCards()
     {
         cardSpawner.shuffledEnemyCards.RemoveAt(0);
