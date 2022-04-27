@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        buttonCanClick = true;
+        StartCoroutine(PauseBeforeClicking());        
     }
 
     public void DrawCards()
@@ -107,14 +107,12 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards));
         StartCoroutine(PauseBeforeClicking());
-    }
-    
-    
+    }   
 
 
     private IEnumerator PauseBeforeClicking()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2.5f);
 
         buttonCanClick = true;
     }
