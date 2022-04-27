@@ -328,6 +328,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VisualStudio.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Asteroid.cs"
 "Assets/CardBattler.cs"
 "Assets/Scripts/Card.cs"
 "Assets/Scripts/CardDecks.cs"

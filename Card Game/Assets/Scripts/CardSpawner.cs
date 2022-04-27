@@ -26,7 +26,6 @@ public class CardSpawner : MonoBehaviour
         InstantiateCardDecks();
         ShuffleCardDecks();
     }
-
     
     private void InstantiateCardDecks()
     {
