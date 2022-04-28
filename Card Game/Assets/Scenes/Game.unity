@@ -1561,6 +1561,7 @@ MonoBehaviour:
   card1Duration: 0.5
   card2Duration: 0.4
   card3Duration: 0.3
+  drawCardsButton: {fileID: 1270492929}
   currentTurnIsOver: 0
 --- !u!4 &969804889
 Transform:

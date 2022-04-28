@@ -40,7 +40,7 @@ public class CardBattler : MonoBehaviour
         cardDecks.enemyBattleCards[0].GetComponent<RotateCard>().enabled = true;
 
         //Pause then rotate All Card Texts for 'Pop-up' Effect
-        yield return PauseBeforeRotatingFirstBattleText();        
+        yield return PauseThenRotateFirstCardDetails();        
 
         //Logic to determine which card wins a point
         if (cardDecks.playerBattleCards[0].CardStrength == cardDecks.enemyBattleCards[0].CardStrength)
@@ -70,7 +70,7 @@ public class CardBattler : MonoBehaviour
         cardDecks.enemyBattleCards[1].GetComponent<RotateCard>().enabled = true;
 
         //Pause then rotate All Card Texts for 'Pop-up' Effect
-        yield return PauseBeforeRotatingSecondBattleText();        
+        yield return PauseThenRotateSecondCardDetails();        
 
         //If Player and Enemy Draw
         if (cardDecks.playerBattleCards[1].CardStrength == cardDecks.enemyBattleCards[1].CardStrength)
@@ -100,7 +100,7 @@ public class CardBattler : MonoBehaviour
         cardDecks.enemyBattleCards[2].GetComponent<RotateCard>().enabled = true;
 
         //Pause then rotate All Card Texts for 'Pop-up' Effect
-        yield return PauseBeforeRotatingThirdBattleText();
+        yield return PauseThenRotateThirdCardDetails();
 
         //If Player and Enemy Draw
         if (cardDecks.playerBattleCards[2].CardStrength == cardDecks.enemyBattleCards[2].CardStrength)
@@ -118,23 +118,25 @@ public class CardBattler : MonoBehaviour
             //enemy wins point
             Tween.Shake(cardDecks.playerBattleCards[2].transform, cardDecks.playerBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToEnemyScore();
-        }       
+        }
+
+        StartCoroutine(gameManager.AllowDrawAgain());
 
     }
 
-    private IEnumerator PauseBeforeRotatingFirstBattleText()
+    private IEnumerator PauseThenRotateFirstCardDetails()
     {
         yield return new WaitForSeconds(1f);
         cardDecks.playerBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
         cardDecks.enemyBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
     }
-    private IEnumerator PauseBeforeRotatingSecondBattleText()
+    private IEnumerator PauseThenRotateSecondCardDetails()
     {
         yield return new WaitForSeconds(1f);
         cardDecks.playerBattleCards[1].GetComponent<RotateCardDetails>().enabled = true;
         cardDecks.enemyBattleCards[1].GetComponent<RotateCardDetails>().enabled = true;
     }
-    private IEnumerator PauseBeforeRotatingThirdBattleText()
+    private IEnumerator PauseThenRotateThirdCardDetails()
     {
         yield return new WaitForSeconds(1f);
         cardDecks.playerBattleCards[2].GetComponent<RotateCardDetails>().enabled = true;

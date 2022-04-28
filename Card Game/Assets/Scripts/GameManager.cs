@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using DigitalRuby.Tween;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float card2Duration;
     [SerializeField] float card3Duration;
 
+    [SerializeField] Button drawCardsButton;
     [SerializeField] private bool currentTurnIsOver;
     
     ScoreManager scoreManager;
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        drawCardsButton.image.color = Color.red;
+        drawCardsButton.enabled = false;
         StartCoroutine(AllowDrawAgain());        
     }
 
@@ -40,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentTurnIsOver)
         {
+            DisableButton();
             DrawPlayerCards();
             DrawEnemyCards();
             StartCoroutine(cardBattler.CardBattle());            
@@ -110,7 +115,18 @@ public class GameManager : MonoBehaviour
     public IEnumerator AllowDrawAgain()
     {
         yield return new WaitForSeconds(2.5f);
-
+        EnableButton();
         currentTurnIsOver = true;
-    }       
+    }     
+    
+    private void DisableButton()
+    {
+        drawCardsButton.image.color = Color.red;
+        drawCardsButton.enabled = false;
+    }
+    private void EnableButton()
+    {
+        drawCardsButton.image.color = Color.green;
+        drawCardsButton.enabled = true;
+    }
 }
