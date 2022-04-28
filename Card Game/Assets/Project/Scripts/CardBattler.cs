@@ -5,6 +5,11 @@ using Pixelplacement;
 
 public class CardBattler : MonoBehaviour
 {
+    [Header("Timing ")]
+    [SerializeField] float delayBeforeHitAnimation;
+    [SerializeField] float delayBeforeBattle;
+
+    [Header("Hit Animation Shake")]
     [SerializeField] Vector3 shakeIntensity;
     [SerializeField] float shakeDuration;
     [SerializeField] float shakeDelay;
@@ -22,39 +27,38 @@ public class CardBattler : MonoBehaviour
 
     public IEnumerator CardBattle()
     {
-       yield return BattleFirstCards();        
-       yield return BattleSecondCards();        
-       yield return BattleThirdCards();
+       yield return BattleFirstCards(delayBeforeBattle);        
+       yield return BattleSecondCards(delayBeforeBattle);        
+       yield return BattleThirdCards(delayBeforeBattle);
        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.playerBattleCards));
        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.enemyBattleCards));
        StartCoroutine(gameManager.AllowDrawingOfCards());
        yield break;
     }
 
-    private IEnumerator BattleFirstCards()
+    private IEnumerator BattleFirstCards(float seconds)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(seconds);
 
         //Rotate Cards in battle
-        cardDecks.playerBattleCards[0].GetComponent<RotateCard>().enabled = true;
-        cardDecks.enemyBattleCards[0].GetComponent<RotateCard>().enabled = true;
+        RotateCards(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0]);
 
         //Pause then rotate All Card Texts for 'Pop-up' Effect
-        yield return PauseThenPopUpFirstCardDetails();        
+        yield return DelayThenRotateAllCardDetails(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0]);
 
         //Logic to determine which card wins a point
         if (cardDecks.playerBattleCards[0].CardStrength == cardDecks.enemyBattleCards[0].CardStrength)
         {
             //TODO add rigidbody plus some torque?
-            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[0]); 
-            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[0]);
+            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[0], delayBeforeHitAnimation));
+            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[0], delayBeforeHitAnimation));
             yield break;
         }
         else if (cardDecks.playerBattleCards[0].CardStrength > cardDecks.enemyBattleCards[0].CardStrength)
         {
             //PLAYER WINS POINT                       
             //TODO add rigidbody to enemy plus torque
-            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[0]);
+            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[0], delayBeforeHitAnimation);
             Tween.Shake(cardDecks.enemyBattleCards[0].transform, cardDecks.enemyBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);            
             scoreManager.AddToPlayerScore();
         }
@@ -62,104 +66,92 @@ public class CardBattler : MonoBehaviour
         {
             //ENEMY WINS POINT            
             //TODO add rigidbody to player plus torque
-            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[0]);
+            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[0], delayBeforeHitAnimation);
             Tween.Shake(cardDecks.playerBattleCards[0].transform, cardDecks.playerBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);                     
             scoreManager.AddToEnemyScore();
         }        
     }
 
-    private IEnumerator BattleSecondCards()
+    private IEnumerator BattleSecondCards(float seconds)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(seconds);
+        
+        RotateCards(cardDecks.playerBattleCards[1], cardDecks.enemyBattleCards[1]);
+        
+        yield return DelayThenRotateAllCardDetails(cardDecks.playerBattleCards[1], cardDecks.enemyBattleCards[1]);
 
-        //Rotate Cards in battle
-        cardDecks.playerBattleCards[1].GetComponent<RotateCard>().enabled = true;
-        cardDecks.enemyBattleCards[1].GetComponent<RotateCard>().enabled = true;
-
-        //Pause then rotate All Card Texts for 'Pop-up' Effect
-        yield return PauseThenPopUpSecondCardDetails();        
-
-        //If Player and Enemy Draw
+        //Player and Enemy DRAW
         if (cardDecks.playerBattleCards[1].CardStrength == cardDecks.enemyBattleCards[1].CardStrength)
         {
-            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[1]);
-            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[1]);
+            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[1], delayBeforeHitAnimation));
+            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[1], delayBeforeHitAnimation));
             yield break;
         }
         if (cardDecks.playerBattleCards[1].CardStrength > cardDecks.enemyBattleCards[1].CardStrength)
         {
-            //player wins point
-            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[1]);
+            //Player wins point
+            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[1], delayBeforeHitAnimation);
             Tween.Shake(cardDecks.enemyBattleCards[1].transform, cardDecks.enemyBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToPlayerScore();
         }
         else
         {
-            //enemy wins point
-            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[1]);
+            //Enemy wins point
+            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[1], delayBeforeHitAnimation);
             Tween.Shake(cardDecks.playerBattleCards[1].transform, cardDecks.playerBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToEnemyScore();
         }
     }
 
-    private IEnumerator BattleThirdCards()
+    private IEnumerator BattleThirdCards(float seconds)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(seconds);
 
-        //Rotates cards in Battle
-        cardDecks.playerBattleCards[2].GetComponent<RotateCard>().enabled = true;
-        cardDecks.enemyBattleCards[2].GetComponent<RotateCard>().enabled = true;
+        RotateCards(cardDecks.playerBattleCards[2], cardDecks.enemyBattleCards[2]);
+        
+        yield return DelayThenRotateAllCardDetails(cardDecks.playerBattleCards[2], cardDecks.enemyBattleCards[2]);
 
-        //Pause then rotate All Card Texts for 'Pop-up' Effect
-        yield return PauseThenPopUpThirdCardDetails();
-
-        //If Player and Enemy Draw
+            //Player and Enemy DRAW
         if (cardDecks.playerBattleCards[2].CardStrength == cardDecks.enemyBattleCards[2].CardStrength)
         {
-            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[2]));
-            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[2]));
+            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[2], delayBeforeHitAnimation));
+            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[2], delayBeforeHitAnimation));
             yield break;
         }
         if (cardDecks.playerBattleCards[2].CardStrength > cardDecks.enemyBattleCards[2].CardStrength)
         {
-            //player wins point
-            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[2]);
+            //Player wins point
+            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[2], delayBeforeHitAnimation);
             Tween.Shake(cardDecks.enemyBattleCards[2].transform, cardDecks.enemyBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToPlayerScore();
         }
         else
         {
-            //enemy wins point
-            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[2]);
+            //Enemy wins point
+            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[2], delayBeforeHitAnimation);
             Tween.Shake(cardDecks.playerBattleCards[2].transform, cardDecks.playerBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToEnemyScore();
         }
 
         StartCoroutine(gameManager.AllowDrawingOfCards());
-
     }
 
-    private IEnumerator PauseThenPopUpFirstCardDetails()
+    private void RotateCards(Card card1, Card card2)
     {
-        yield return new WaitForSeconds(1f);
-        cardDecks.playerBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
-        cardDecks.enemyBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
+        card1.GetComponent<RotateCard>().enabled = true;
+        card2.GetComponent<RotateCard>().enabled = true;
     }
-    private IEnumerator PauseThenPopUpSecondCardDetails()
+
+    private IEnumerator DelayThenRotateAllCardDetails(Card card1, Card card2)
     {
         yield return new WaitForSeconds(1f);
-        cardDecks.playerBattleCards[1].GetComponent<RotateCardDetails>().enabled = true;
-        cardDecks.enemyBattleCards[1].GetComponent<RotateCardDetails>().enabled = true;
+        card1.GetComponent<RotateCardDetails>().enabled = true;
+        card2.GetComponent<RotateCardDetails>().enabled = true;
     }
-    private IEnumerator PauseThenPopUpThirdCardDetails()
+    
+    private IEnumerator DelayThenPlayHitAnimation(Card card, float seconds)
     {
-        yield return new WaitForSeconds(1f);
-        cardDecks.playerBattleCards[2].GetComponent<RotateCardDetails>().enabled = true;
-        cardDecks.enemyBattleCards[2].GetComponent<RotateCardDetails>().enabled = true;
-    } 
-    private IEnumerator DelayThenPlayHitAnimation(Card card)
-    {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(seconds);
         card.transform.GetChild(4).gameObject.SetActive(true);
     }
 }
