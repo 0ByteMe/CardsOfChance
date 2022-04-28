@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pixelplacement;
 
 public class CardBattler : MonoBehaviour
 {
+    [SerializeField] Vector3 shakeIntensity;
+    [SerializeField] float shakeDuration;
+    [SerializeField] float shakeDelay;
+
+
+
     CardDecks cardDecks;
     ScoreManager scoreManager;
     GameManager gameManager;
@@ -30,14 +37,12 @@ public class CardBattler : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        //Rotate Cards
+        //Rotate Cards in battle
         cardDecks.playerBattleCards[0].GetComponent<RotateCard>().enabled = true;
         cardDecks.enemyBattleCards[0].GetComponent<RotateCard>().enabled = true;
 
-        //Pause then rotate Card Text
-        yield return PauseBeforeRotatingFirstBattleText();
-
-        //TODO add shake to cardto simulate Damage
+        //Pause then rotate All Card Texts for 'Pop-up' Effect
+        yield return PauseBeforeRotatingFirstBattleText();        
 
         //Logic to determine which card wins a point
         if (cardDecks.playerBattleCards[0].CardStrength == cardDecks.enemyBattleCards[0].CardStrength)
@@ -46,10 +51,14 @@ public class CardBattler : MonoBehaviour
         }
         else if (cardDecks.playerBattleCards[0].CardStrength > cardDecks.enemyBattleCards[0].CardStrength)
         {
+            //player wins point
+            Tween.Shake(cardDecks.enemyBattleCards[0].transform, cardDecks.enemyBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToPlayerScore();
         }
         else
-        {
+        {            
+            //enemy wins point
+            Tween.Shake(cardDecks.playerBattleCards[0].transform, cardDecks.playerBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToEnemyScore();
         }        
     }
@@ -58,26 +67,28 @@ public class CardBattler : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        //Rotate Card
+        //Rotate Cards in battle
         cardDecks.playerBattleCards[1].GetComponent<RotateCard>().enabled = true;
         cardDecks.enemyBattleCards[1].GetComponent<RotateCard>().enabled = true;
 
-        //Pause then rotate Card Text
-        yield return PauseBeforeRotatingSecondBattleText();
+        //Pause then rotate All Card Texts for 'Pop-up' Effect
+        yield return PauseBeforeRotatingSecondBattleText();        
 
-        //TODO add shake to cardto simulate Damage
-
-        //Logic to determine which card wins a point
+        //If Player and Enemy Draw
         if (cardDecks.playerBattleCards[1].CardStrength == cardDecks.enemyBattleCards[1].CardStrength)
         {
             yield break;
         }
         if (cardDecks.playerBattleCards[1].CardStrength > cardDecks.enemyBattleCards[1].CardStrength)
         {
+            //player wins point
+            Tween.Shake(cardDecks.enemyBattleCards[1].transform, cardDecks.enemyBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToPlayerScore();
         }
         else
         {
+            //enemy wins point
+            Tween.Shake(cardDecks.playerBattleCards[1].transform, cardDecks.playerBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToEnemyScore();
         }
     }
@@ -86,24 +97,28 @@ public class CardBattler : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        //Rotates cards
+        //Rotates cards in Battle
         cardDecks.playerBattleCards[2].GetComponent<RotateCard>().enabled = true;
         cardDecks.enemyBattleCards[2].GetComponent<RotateCard>().enabled = true;
 
-        //Pause then rotate Card Text
+        //Pause then rotate All Card Texts for 'Pop-up' Effect
         yield return PauseBeforeRotatingThirdBattleText();
 
-        //Logic to determine which card wins a point
+        //If Player and Enemy Draw
         if (cardDecks.playerBattleCards[2].CardStrength == cardDecks.enemyBattleCards[2].CardStrength)
         {
             yield break;
         }
         if (cardDecks.playerBattleCards[2].CardStrength > cardDecks.enemyBattleCards[2].CardStrength)
         {
+            //player wins point
+            Tween.Shake(cardDecks.enemyBattleCards[2].transform, cardDecks.enemyBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToPlayerScore();
         }
         else
         {
+            //enemy wins point
+            Tween.Shake(cardDecks.playerBattleCards[2].transform, cardDecks.playerBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToEnemyScore();
         }       
 
