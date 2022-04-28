@@ -144,6 +144,18 @@ PrefabInstance:
       propertyPath: _CardStrength
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6894055798161975852, guid: b121188914f7825419e0db794a797dc3, type: 3}
+      propertyPath: m_text
+      value: Miner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894055798161975852, guid: b121188914f7825419e0db794a797dc3, type: 3}
+      propertyPath: m_fontSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894055798161975852, guid: b121188914f7825419e0db794a797dc3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b121188914f7825419e0db794a797dc3, type: 3}
 --- !u!4 &7006239643690867174 stripped

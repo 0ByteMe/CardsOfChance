@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2966705929730704461, guid: b121188914f7825419e0db794a797dc3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.649
+      objectReference: {fileID: 0}
     - target: {fileID: 3508596380009564200, guid: b121188914f7825419e0db794a797dc3, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -74,6 +78,18 @@ PrefabInstance:
     - target: {fileID: 4832386455101783039, guid: b121188914f7825419e0db794a797dc3, type: 3}
       propertyPath: _CardStrength
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894055798161975852, guid: b121188914f7825419e0db794a797dc3, type: 3}
+      propertyPath: m_text
+      value: Mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894055798161975852, guid: b121188914f7825419e0db794a797dc3, type: 3}
+      propertyPath: m_fontSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894055798161975852, guid: b121188914f7825419e0db794a797dc3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b121188914f7825419e0db794a797dc3, type: 3}
