@@ -333,6 +333,8 @@
 "Assets/Scripts/CardDecks.cs"
 "Assets/Scripts/CardSpawner.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/RotateCard.cs"
+"Assets/Scripts/RotateText.cs"
 "Assets/Scripts/ScoreManager.cs"
 "Assets/Tween/Demo/TweenDemo.cs"
 "Assets/Tween/Tween.cs"

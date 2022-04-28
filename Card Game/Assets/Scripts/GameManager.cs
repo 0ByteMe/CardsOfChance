@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float card2Duration;
     [SerializeField] float card3Duration;
 
-    [SerializeField] bool buttonCanClick;
+    [SerializeField] private bool currentTurnIsOver;
     
     ScoreManager scoreManager;
     CardDecks cardDecks;
@@ -33,22 +33,22 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(PauseBeforeClicking());        
+        StartCoroutine(AllowDrawAgain());        
     }
 
     public void DrawCards()
     {
-        if (buttonCanClick)
+        if (currentTurnIsOver)
         {
             DrawPlayerCards();
             DrawEnemyCards();
-            cardBattler.CardBattle();            
+            StartCoroutine(cardBattler.CardBattle());            
         }
     }
 
     private void DrawPlayerCards()
     {
-        buttonCanClick = false;
+        currentTurnIsOver = false;
 
         //Moves card at index 0 of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard1Pos = (t) =>
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         };
         TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[0].transform.position, playerCard1Transform.position, card1Duration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard1Pos);
 
+        
 
         //Moves card at index 1 of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard2Pos = (t) =>
@@ -76,8 +77,7 @@ public class GameManager : MonoBehaviour
 
         cardDecks.AddToCurrentBattleCards(cardDecks.playerBattleCards, cardDecks.shuffledPlayerCards[0], cardDecks.shuffledPlayerCards[1], cardDecks.shuffledPlayerCards[2]);
 
-        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledPlayerCards));
-        StartCoroutine(PauseBeforeClicking());
+        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledPlayerCards));        
     }
 
     private void DrawEnemyCards()
@@ -104,15 +104,13 @@ public class GameManager : MonoBehaviour
 
         cardDecks.AddToCurrentBattleCards(cardDecks.enemyBattleCards, cardDecks.shuffledEnemyCards[0], cardDecks.shuffledEnemyCards[1], cardDecks.shuffledEnemyCards[2]);
 
-        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards));
-        StartCoroutine(PauseBeforeClicking());
+        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards));        
     }   
 
-
-    private IEnumerator PauseBeforeClicking()
+    public IEnumerator AllowDrawAgain()
     {
         yield return new WaitForSeconds(2.5f);
 
-        buttonCanClick = true;
-    }   
+        currentTurnIsOver = true;
+    }       
 }

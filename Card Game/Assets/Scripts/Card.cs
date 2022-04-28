@@ -19,7 +19,7 @@ public class Card : MonoBehaviour
     public int CardStrength
     {
         get
-        {
+        {            
             return cardStrength;
         }        
     }

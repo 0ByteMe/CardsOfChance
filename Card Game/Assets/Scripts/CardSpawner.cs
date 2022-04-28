@@ -29,13 +29,13 @@ public class CardSpawner : MonoBehaviour
     {
         foreach (Card prefab in playerCardPrefabs)
         {
-           Card newPlayerCard = Instantiate(prefab, playerDeckLocation.position, Quaternion.Euler(-90, -90, -90));
+           Card newPlayerCard = Instantiate(prefab, playerDeckLocation.position, prefab.transform.rotation);
            cardDecks.playerCards.Add(newPlayerCard);
         }
 
         foreach (Card prefab in enemyCardPrefabs)
         {
-            Card newEnemyCard = Instantiate(prefab, enemyDeckLocation.position, Quaternion.Euler(-90, -90, -90));
+            Card newEnemyCard = Instantiate(prefab, enemyDeckLocation.position, prefab.transform.rotation);
             cardDecks.enemyCards.Add(newEnemyCard);
         }
     }

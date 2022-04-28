@@ -281,6 +281,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4832386455040202776}
   - component: {fileID: 4832386455101783039}
+  - component: {fileID: 2778362957271886532}
+  - component: {fileID: 998337615640572077}
   m_Layer: 0
   m_Name: BaseCard
   m_TagString: Untagged
@@ -295,8 +297,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4832386455040202777}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.63, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.70710677, z: -0.70710677, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -305,7 +307,7 @@ Transform:
   - {fileID: 2966705929730704461}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: -90, z: -90}
 --- !u!114 &4832386455101783039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,8 +322,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardNameText: {fileID: 6894055798161975852}
   cardStrengthText: {fileID: 6981204317034799263}
-  cardName: Dylanator
-  cardStrength: 100
+  cardName: 
+  cardStrength: 0
+--- !u!114 &2778362957271886532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832386455040202777}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa945981aca8ca4390c9f70f701b5d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &998337615640572077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832386455040202777}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc280920c0a72bb4bbcdd3f5aaaa603d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardNameText: {fileID: 6894055798161975852}
+  cardStrengthText: {fileID: 6981204317034799263}
 --- !u!1 &6868922804886216903
 GameObject:
   m_ObjectHideFlags: 0

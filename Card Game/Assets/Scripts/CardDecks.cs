@@ -23,7 +23,7 @@ public class CardDecks : MonoBehaviour
 
     public IEnumerator RemoveCardsFromDeck(List<Card> deckOfCards)
     {
-        yield return new WaitForSeconds(.6f);
+        yield return new WaitForSeconds(2f);
 
         deckOfCards.RemoveAt(0);
         deckOfCards.RemoveAt(0);
