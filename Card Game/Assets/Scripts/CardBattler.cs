@@ -27,7 +27,7 @@ public class CardBattler : MonoBehaviour
        yield return BattleThirdCards();
        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.playerBattleCards));
        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.enemyBattleCards));
-       StartCoroutine(gameManager.AllowDrawAgain());
+       StartCoroutine(gameManager.AllowDrawingOfCards());
        yield break;
     }
 
@@ -120,7 +120,7 @@ public class CardBattler : MonoBehaviour
             scoreManager.AddToEnemyScore();
         }
 
-        StartCoroutine(gameManager.AllowDrawAgain());
+        StartCoroutine(gameManager.AllowDrawingOfCards());
 
     }
 

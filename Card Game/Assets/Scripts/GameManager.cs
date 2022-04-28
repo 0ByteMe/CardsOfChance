@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using DigitalRuby.Tween;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,9 +36,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        drawCardsButton.image.color = Color.red;
-        drawCardsButton.enabled = false;
-        StartCoroutine(AllowDrawAgain());        
+        DisableButton();
+        StartCoroutine(AllowDrawingOfCards());        
     }
 
     public void DrawCards()
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards));        
     }   
 
-    public IEnumerator AllowDrawAgain()
+    public IEnumerator AllowDrawingOfCards()
     {
         yield return new WaitForSeconds(2.5f);
         EnableButton();
@@ -121,12 +121,14 @@ public class GameManager : MonoBehaviour
     
     private void DisableButton()
     {
-        drawCardsButton.image.color = Color.red;
+        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+        //drawCardsButton.image.color = Color.red;
         drawCardsButton.enabled = false;
     }
     private void EnableButton()
     {
-        drawCardsButton.image.color = Color.green;
+        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+        //drawCardsButton.image.color = Color.green;
         drawCardsButton.enabled = true;
     }
 }
