@@ -36,8 +36,8 @@ public class CardBattler : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         //Rotate Cards in battle
-        cardDecks.playerBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
-        cardDecks.enemyBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
+        cardDecks.playerBattleCards[0].GetComponent<RotateCard>().enabled = true;
+        cardDecks.enemyBattleCards[0].GetComponent<RotateCard>().enabled = true;
 
         //Pause then rotate All Card Texts for 'Pop-up' Effect
         yield return PauseBeforeRotatingFirstBattleText();        
