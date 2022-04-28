@@ -21,8 +21,6 @@ public class CardBattler : MonoBehaviour
         cardDecks.RemoveCardsFromDeck(cardDecks.enemyBattleCards);
     }
 
-
-
     private IEnumerator BattleFirstCards()
     {
         yield return new WaitForSeconds(1f);

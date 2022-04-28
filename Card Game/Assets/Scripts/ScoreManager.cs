@@ -11,7 +11,6 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerScoreText;
     [SerializeField] TextMeshProUGUI enemyScoreText;
 
-
     private void Start()
     {
         playerScore = 0;

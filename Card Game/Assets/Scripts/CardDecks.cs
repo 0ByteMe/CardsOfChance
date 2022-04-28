@@ -12,7 +12,7 @@ public class CardDecks : MonoBehaviour
     public List<Card> shuffledEnemyCards;
     [Header("Current Battle Cards")]
     public List<Card> playerBattleCards;
-    public List<Card> enemyBattleCards;
+    public List<Card> enemyBattleCards;     
 
     public void AddToCurrentBattleCards(List<Card> listToAddTo, Card card1, Card card2, Card card3)
     {

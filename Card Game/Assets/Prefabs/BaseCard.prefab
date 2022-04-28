@@ -320,8 +320,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardNameText: {fileID: 6894055798161975852}
   cardStrengthText: {fileID: 6981204317034799263}
-  cardName: 
-  cardStrength: 0
+  cardName: Dylanator
+  cardStrength: 100
 --- !u!1 &6868922804886216903
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
 public class CardSpawner : MonoBehaviour
 {
     [Header("Card Deck Prefabs")]
@@ -20,13 +19,11 @@ public class CardSpawner : MonoBehaviour
     {
         cardDecks = GetComponentInParent<CardDecks>();
     }
-
     private void Start()
     {
         InstantiateCardDecks();
         ShuffleCardDecks();
-    }
-    
+    }    
     private void InstantiateCardDecks()
     {
         foreach (Card prefab in playerCardPrefabs)

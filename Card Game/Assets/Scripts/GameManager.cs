@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     CardDecks cardDecks;
     CardBattler cardBattler;
 
-
     private void Awake()
     {        
         scoreManager = GetComponent<ScoreManager>();
@@ -115,6 +114,5 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         buttonCanClick = true;
-    }
-   
+    }   
 }
