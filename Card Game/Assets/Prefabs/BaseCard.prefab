@@ -23,15 +23,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411438390676997061}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0.707, y: 0.982, z: -0.2}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0.707, y: 0.642, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9154671569925940038}
   m_Father: {fileID: 4832386455040202776}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!1 &4720445472599621475
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4720445472599621475}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.17799951}
+  m_LocalPosition: {x: 0, y: 0, z: 0.51799905}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -90,7 +90,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6415590971787599968, guid: 15449a421692a814e861e68826802f32, type: 2}
+  - {fileID: 4346423039682931653, guid: d200fa6ad6681b346a9ee6921a6d8858, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,8 +136,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 15449a421692a814e861e68826802f32, type: 2}
-  m_sharedMaterial: {fileID: -6415590971787599968, guid: 15449a421692a814e861e68826802f32, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d200fa6ad6681b346a9ee6921a6d8858, type: 2}
+  m_sharedMaterial: {fileID: 4346423039682931653, guid: d200fa6ad6681b346a9ee6921a6d8858, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 5
-  m_fontSizeBase: 5
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardNameText: {fileID: 6894055798161975852}
-  cardStrengthText: {fileID: 6981204317034799263}
+  cardStrengthPivotPoint: {fileID: 2502343914751291537}
 --- !u!1 &6868922804886216903
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +440,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6415590971787599968, guid: 15449a421692a814e861e68826802f32, type: 2}
+  - {fileID: -4452291991881102216, guid: 922e9e5a1a1cb764e8d3942b39b4d40f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -486,8 +486,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 15449a421692a814e861e68826802f32, type: 2}
-  m_sharedMaterial: {fileID: -6415590971787599968, guid: 15449a421692a814e861e68826802f32, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 922e9e5a1a1cb764e8d3942b39b4d40f, type: 2}
+  m_sharedMaterial: {fileID: -4452291991881102216, guid: 922e9e5a1a1cb764e8d3942b39b4d40f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

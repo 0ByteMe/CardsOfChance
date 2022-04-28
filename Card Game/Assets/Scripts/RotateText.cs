@@ -6,21 +6,24 @@ using TMPro;
 public class RotateText : MonoBehaviour
 {
     [SerializeField] TextMeshPro cardNameText;
-    [SerializeField] TextMeshPro cardStrengthText;
-    Quaternion targetRotation;
+    [SerializeField] Transform cardStrengthPivotPoint;
+    Quaternion targetNameTextRotation;
+    Quaternion targetStrengthTextRotation;
+
     float speed = 0.1f;
     float timeCount = 0.0f;
 
     private void Start()
     {
-        targetRotation = Quaternion.Euler(-90, 0, 0);
+        targetNameTextRotation = Quaternion.Euler(-90, 0, 0);
+        targetStrengthTextRotation = Quaternion.Euler(0, 180, 0);
         StartCoroutine(PauseThenDisable());
     }
 
     void Update()
     {
-        cardNameText.transform.localRotation = Quaternion.Lerp(cardNameText.transform.localRotation, targetRotation, timeCount * speed);
-        cardStrengthText.transform.localRotation = Quaternion.Lerp(cardNameText.transform.localRotation, targetRotation, timeCount * speed);
+        cardNameText.transform.localRotation = Quaternion.Lerp(cardNameText.transform.localRotation, targetNameTextRotation, timeCount * speed);
+        cardStrengthPivotPoint.transform.localRotation = Quaternion.Lerp(cardStrengthPivotPoint.transform.localRotation, targetStrengthTextRotation, timeCount * speed);
         timeCount = timeCount + Time.deltaTime;
     }
 

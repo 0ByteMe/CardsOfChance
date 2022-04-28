@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4832386455101783039, guid: b121188914f7825419e0db794a797dc3, type: 3}
       propertyPath: cardName
-      value: Big Dude
+      value: BigGuy
       objectReference: {fileID: 0}
     - target: {fileID: 4832386455101783039, guid: b121188914f7825419e0db794a797dc3, type: 3}
       propertyPath: _cardName

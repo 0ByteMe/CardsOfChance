@@ -1626,7 +1626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeIntensity: {x: 0.25, y: 0.25, z: 0.25}
   shakeDuration: 0.4
-  shakeDelay: 1
+  shakeDelay: 1.2
 --- !u!1 &987067177
 GameObject:
   m_ObjectHideFlags: 0
