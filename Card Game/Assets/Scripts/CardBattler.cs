@@ -9,8 +9,6 @@ public class CardBattler : MonoBehaviour
     [SerializeField] float shakeDuration;
     [SerializeField] float shakeDelay;
 
-
-
     CardDecks cardDecks;
     ScoreManager scoreManager;
     GameManager gameManager;
@@ -38,8 +36,8 @@ public class CardBattler : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         //Rotate Cards in battle
-        cardDecks.playerBattleCards[0].GetComponent<RotateCard>().enabled = true;
-        cardDecks.enemyBattleCards[0].GetComponent<RotateCard>().enabled = true;
+        cardDecks.playerBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
+        cardDecks.enemyBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
 
         //Pause then rotate All Card Texts for 'Pop-up' Effect
         yield return PauseBeforeRotatingFirstBattleText();        
@@ -127,20 +125,20 @@ public class CardBattler : MonoBehaviour
     private IEnumerator PauseBeforeRotatingFirstBattleText()
     {
         yield return new WaitForSeconds(1f);
-        cardDecks.playerBattleCards[0].GetComponent<RotateText>().enabled = true;
-        cardDecks.enemyBattleCards[0].GetComponent<RotateText>().enabled = true;
+        cardDecks.playerBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
+        cardDecks.enemyBattleCards[0].GetComponent<RotateCardDetails>().enabled = true;
     }
     private IEnumerator PauseBeforeRotatingSecondBattleText()
     {
         yield return new WaitForSeconds(1f);
-        cardDecks.playerBattleCards[1].GetComponent<RotateText>().enabled = true;
-        cardDecks.enemyBattleCards[1].GetComponent<RotateText>().enabled = true;
+        cardDecks.playerBattleCards[1].GetComponent<RotateCardDetails>().enabled = true;
+        cardDecks.enemyBattleCards[1].GetComponent<RotateCardDetails>().enabled = true;
     }
     private IEnumerator PauseBeforeRotatingThirdBattleText()
     {
         yield return new WaitForSeconds(1f);
-        cardDecks.playerBattleCards[2].GetComponent<RotateText>().enabled = true;
-        cardDecks.enemyBattleCards[2].GetComponent<RotateText>().enabled = true;
+        cardDecks.playerBattleCards[2].GetComponent<RotateCardDetails>().enabled = true;
+        cardDecks.enemyBattleCards[2].GetComponent<RotateCardDetails>().enabled = true;
     }
 
 }
