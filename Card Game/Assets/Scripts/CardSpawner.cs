@@ -19,6 +19,7 @@ public class CardSpawner : MonoBehaviour
     {
         cardDecks = GetComponentInParent<CardDecks>();
     }
+
     private void Start()
     {
         InstantiateCardDecks();
