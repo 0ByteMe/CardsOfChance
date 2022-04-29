@@ -7,7 +7,7 @@ public class CardBattler : MonoBehaviour
 {
     [Header("Timing ")]
     [SerializeField] float delayBeforeBattle;
-    [SerializeField] float delayBeforeHitAnimation;
+    [SerializeField] float delayBeforeHitSequence;
     [SerializeField] public float delayToAllowDrawingOfCards;
 
     [Header("Hit Animation Shake")]
@@ -51,26 +51,22 @@ public class CardBattler : MonoBehaviour
         if (cardDecks.playerBattleCards[0].CardStrength == cardDecks.enemyBattleCards[0].CardStrength)
         {
             //TODO add rigidbody plus some torque?
-            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[0], delayBeforeHitAnimation));
-            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[0], delayBeforeHitAnimation));
-            Tween.Shake(cardDecks.playerBattleCards[0].transform, cardDecks.playerBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);
-            Tween.Shake(cardDecks.enemyBattleCards[0].transform, cardDecks.enemyBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            StartCoroutine(DelayThenPlayHitSequence(cardDecks.playerBattleCards[0], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay));
+            StartCoroutine(DelayThenPlayHitSequence(cardDecks.enemyBattleCards[0], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay));
             yield break;
         }
         else if (cardDecks.playerBattleCards[0].CardStrength > cardDecks.enemyBattleCards[0].CardStrength)
         {
             //PLAYER WINS POINT                       
             //TODO add rigidbody to enemy plus torque
-            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[0], delayBeforeHitAnimation);
-            Tween.Shake(cardDecks.enemyBattleCards[0].transform, cardDecks.enemyBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);            
+            yield return DelayThenPlayHitSequence(cardDecks.enemyBattleCards[0], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToPlayerScore();
         }
         else
         {
             //ENEMY WINS POINT            
             //TODO add rigidbody to player plus torque
-            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[0], delayBeforeHitAnimation);
-            Tween.Shake(cardDecks.playerBattleCards[0].transform, cardDecks.playerBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);                     
+            yield return DelayThenPlayHitSequence(cardDecks.playerBattleCards[0], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToEnemyScore();
         }        
     }
@@ -86,24 +82,20 @@ public class CardBattler : MonoBehaviour
         //Player and Enemy DRAW
         if (cardDecks.playerBattleCards[1].CardStrength == cardDecks.enemyBattleCards[1].CardStrength)
         {
-            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[1], delayBeforeHitAnimation));
-            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[1], delayBeforeHitAnimation));
-            Tween.Shake(cardDecks.playerBattleCards[1].transform, cardDecks.playerBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
-            Tween.Shake(cardDecks.enemyBattleCards[1].transform, cardDecks.enemyBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            StartCoroutine(DelayThenPlayHitSequence(cardDecks.playerBattleCards[1], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay));
+            StartCoroutine(DelayThenPlayHitSequence(cardDecks.enemyBattleCards[1], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay));
             yield break;
         }
         if (cardDecks.playerBattleCards[1].CardStrength > cardDecks.enemyBattleCards[1].CardStrength)
         {
             //Player wins point
-            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[1], delayBeforeHitAnimation);
-            Tween.Shake(cardDecks.enemyBattleCards[1].transform, cardDecks.enemyBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            yield return DelayThenPlayHitSequence(cardDecks.enemyBattleCards[1], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToPlayerScore();
         }
         else
         {
             //Enemy wins point
-            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[1], delayBeforeHitAnimation);
-            Tween.Shake(cardDecks.playerBattleCards[1].transform, cardDecks.playerBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            yield return DelayThenPlayHitSequence(cardDecks.playerBattleCards[1], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToEnemyScore();
         }
     }
@@ -119,24 +111,20 @@ public class CardBattler : MonoBehaviour
             //Player and Enemy DRAW
         if (cardDecks.playerBattleCards[2].CardStrength == cardDecks.enemyBattleCards[2].CardStrength)
         {
-            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[2], delayBeforeHitAnimation));
-            StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[2], delayBeforeHitAnimation));
-            Tween.Shake(cardDecks.playerBattleCards[2].transform, cardDecks.playerBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
-            Tween.Shake(cardDecks.enemyBattleCards[2].transform, cardDecks.enemyBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            StartCoroutine(DelayThenPlayHitSequence(cardDecks.playerBattleCards[2], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay));
+            StartCoroutine(DelayThenPlayHitSequence(cardDecks.enemyBattleCards[2], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay));
             yield break;
         }
         if (cardDecks.playerBattleCards[2].CardStrength > cardDecks.enemyBattleCards[2].CardStrength)
         {
             //Player wins point
-            yield return DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[2], delayBeforeHitAnimation);
-            Tween.Shake(cardDecks.enemyBattleCards[2].transform, cardDecks.enemyBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            StartCoroutine(DelayThenPlayHitSequence(cardDecks.enemyBattleCards[2], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay));
             scoreManager.AddToPlayerScore();
         }
         else
         {
             //Enemy wins point
-            yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[2], delayBeforeHitAnimation);
-            Tween.Shake(cardDecks.playerBattleCards[2].transform, cardDecks.playerBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            StartCoroutine(DelayThenPlayHitSequence(cardDecks.playerBattleCards[2], delayBeforeHitSequence, shakeIntensity, shakeDuration, shakeDelay));
             scoreManager.AddToEnemyScore();
         }        
     }
@@ -154,10 +142,11 @@ public class CardBattler : MonoBehaviour
         card2.GetComponent<RotateCardDetails>().enabled = true;
     }
     
-    private IEnumerator DelayThenPlayHitAnimation(Card card, float seconds)
+    private IEnumerator DelayThenPlayHitSequence(Card card, float seconds, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)
     {
         yield return new WaitForSeconds(seconds);
         card.transform.GetChild(4).gameObject.SetActive(true);
+        Tween.Shake(card.transform, card.transform.position, shakeIntensity, shakeDuration, shakeDelay);
     }
 
     public IEnumerator AllowDrawingOfCards(float seconds)

@@ -1630,10 +1630,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBeforeBattle: 1.1
-  delayBeforeHitAnimation: 1.1
+  delayBeforeHitSequence: 1.1
   delayToAllowDrawingOfCards: 1.5
-  shakeIntensity: {x: 0.25, y: 0.25, z: 0.25}
-  shakeDuration: 0.4
+  shakeIntensity: {x: 0.3, y: 0.3, z: 0.3}
+  shakeDuration: 0.35
   shakeDelay: 0
 --- !u!1 &987067177
 GameObject:
