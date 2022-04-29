@@ -160,6 +160,7 @@ public class CardBattler : MonoBehaviour
         Tween.Shake(card.transform, card.transform.position, shakeIntensity, shakeDuration, shakeDelay);
         
     }
+
     private IEnumerator HitSequenceForNoWinner(Card card1, Card card2, float delayToBothCardsHits, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)
     {
         yield return new WaitForSeconds(delayToBothCardsHits);
@@ -170,18 +171,16 @@ public class CardBattler : MonoBehaviour
 
     }
 
-
     private IEnumerator DelayBetweenBattle(float seconds)
     {
         yield return new WaitForSeconds(seconds);        
     }
+
     public IEnumerator AllowDrawingOfCards(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         gameManager.canDrawCards = true;
         gameManager.EnableDrawButton();
-    }
-
-  
+    } 
     
 }
