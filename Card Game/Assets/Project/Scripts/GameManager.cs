@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float card3Duration;
 
     [SerializeField] Button drawCardsButton;
-    [SerializeField] private bool currentTurnIsOver;
+    [SerializeField] public bool canDrawCards;
     
     ScoreManager scoreManager;
     CardDecks cardDecks;
@@ -36,15 +36,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        DisableButton();
-        StartCoroutine(AllowDrawingOfCards());        
+        DisableDrawButton();
+        StartCoroutine(cardBattler.AllowDrawingOfCards(cardBattler.delayToAllowDrawingOfCards));
     }
 
     public void DrawCards()
     {
-        if (currentTurnIsOver)
+        if (canDrawCards)
         {
-            DisableButton();
+            DisableDrawButton();
             DrawPlayerCards();
             DrawEnemyCards();
             StartCoroutine(cardBattler.CardBattle());            
@@ -53,18 +53,15 @@ public class GameManager : MonoBehaviour
 
     private void DrawPlayerCards()
     {
-        currentTurnIsOver = false;
-
-        //Moves card at index 0 of Shuffled List to Card Battle Position
+        //Moves card of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard1Pos = (t) =>
         {
             cardDecks.shuffledPlayerCards[0].transform.position = t.CurrentValue;
         };
         TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[0].transform.position, playerCard1Transform.position, card1Duration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard1Pos);
+                
 
-        
-
-        //Moves card at index 1 of Shuffled List to Card Battle Position
+        //Moves card of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard2Pos = (t) =>
         {
             cardDecks.shuffledPlayerCards[1].transform.position = t.CurrentValue;
@@ -72,14 +69,14 @@ public class GameManager : MonoBehaviour
         TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[1].transform.position, playerCard2Transform.position, card2Duration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard2Pos);
 
 
-        //Moves card at index 2 of Shuffled List to Card Battle Position
+        //Moves card of Shuffled List to Card Battle Position
         System.Action<ITween<Vector3>> updatePlayerCard3Pos = (t) =>
         {
             cardDecks.shuffledPlayerCards[2].transform.position = t.CurrentValue;
         };
         TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[2].transform.position, playerCard3Transform.position, card3Duration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard3Pos);
 
-
+        //Adds cards to Battle Playing Cards
         cardDecks.AddToCurrentBattleCards(cardDecks.playerBattleCards, cardDecks.shuffledPlayerCards[0], cardDecks.shuffledPlayerCards[1], cardDecks.shuffledPlayerCards[2]);
 
         StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledPlayerCards));        
@@ -110,25 +107,31 @@ public class GameManager : MonoBehaviour
         cardDecks.AddToCurrentBattleCards(cardDecks.enemyBattleCards, cardDecks.shuffledEnemyCards[0], cardDecks.shuffledEnemyCards[1], cardDecks.shuffledEnemyCards[2]);
 
         StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards));        
-    }   
-
-    public IEnumerator AllowDrawingOfCards()
-    {
-        yield return new WaitForSeconds(2.5f);
-        EnableButton();
-        currentTurnIsOver = true;
-    }     
+    }       
     
-    private void DisableButton()
+    private void DisableDrawButton()
     {
-        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-        //drawCardsButton.image.color = Color.red;
-        drawCardsButton.enabled = false;
+        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;        
+        drawCardsButton.enabled = false;        
     }
-    private void EnableButton()
+    public void EnableDrawButton()
     {
-        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
-        //drawCardsButton.image.color = Color.green;
+        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;        
         drawCardsButton.enabled = true;
+    }
+
+    public void AllowNextDraw()
+    {
+        canDrawCards = true;
+    }
+    public void DisableNextDraw()
+    {
+        canDrawCards = false;
+    }
+
+    private IEnumerator DelayThenAllowFirstDraw(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        EnableDrawButton();
     }
 }

@@ -6,8 +6,9 @@ using Pixelplacement;
 public class CardBattler : MonoBehaviour
 {
     [Header("Timing ")]
-    [SerializeField] float delayBeforeHitAnimation;
     [SerializeField] float delayBeforeBattle;
+    [SerializeField] float delayBeforeHitAnimation;
+    [SerializeField] public float delayToAllowDrawingOfCards;
 
     [Header("Hit Animation Shake")]
     [SerializeField] Vector3 shakeIntensity;
@@ -32,7 +33,7 @@ public class CardBattler : MonoBehaviour
        yield return BattleThirdCards(delayBeforeBattle);
        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.playerBattleCards));
        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.enemyBattleCards));
-       StartCoroutine(gameManager.AllowDrawingOfCards());
+       StartCoroutine(AllowDrawingOfCards(delayToAllowDrawingOfCards));
        yield break;
     }
 
@@ -52,6 +53,8 @@ public class CardBattler : MonoBehaviour
             //TODO add rigidbody plus some torque?
             StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[0], delayBeforeHitAnimation));
             StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[0], delayBeforeHitAnimation));
+            Tween.Shake(cardDecks.playerBattleCards[0].transform, cardDecks.playerBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            Tween.Shake(cardDecks.enemyBattleCards[0].transform, cardDecks.enemyBattleCards[0].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             yield break;
         }
         else if (cardDecks.playerBattleCards[0].CardStrength > cardDecks.enemyBattleCards[0].CardStrength)
@@ -85,6 +88,8 @@ public class CardBattler : MonoBehaviour
         {
             StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[1], delayBeforeHitAnimation));
             StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[1], delayBeforeHitAnimation));
+            Tween.Shake(cardDecks.playerBattleCards[1].transform, cardDecks.playerBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            Tween.Shake(cardDecks.enemyBattleCards[1].transform, cardDecks.enemyBattleCards[1].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             yield break;
         }
         if (cardDecks.playerBattleCards[1].CardStrength > cardDecks.enemyBattleCards[1].CardStrength)
@@ -116,6 +121,8 @@ public class CardBattler : MonoBehaviour
         {
             StartCoroutine(DelayThenPlayHitAnimation(cardDecks.playerBattleCards[2], delayBeforeHitAnimation));
             StartCoroutine(DelayThenPlayHitAnimation(cardDecks.enemyBattleCards[2], delayBeforeHitAnimation));
+            Tween.Shake(cardDecks.playerBattleCards[2].transform, cardDecks.playerBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
+            Tween.Shake(cardDecks.enemyBattleCards[2].transform, cardDecks.enemyBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             yield break;
         }
         if (cardDecks.playerBattleCards[2].CardStrength > cardDecks.enemyBattleCards[2].CardStrength)
@@ -131,9 +138,7 @@ public class CardBattler : MonoBehaviour
             yield return DelayThenPlayHitAnimation(cardDecks.playerBattleCards[2], delayBeforeHitAnimation);
             Tween.Shake(cardDecks.playerBattleCards[2].transform, cardDecks.playerBattleCards[2].transform.position, shakeIntensity, shakeDuration, shakeDelay);
             scoreManager.AddToEnemyScore();
-        }
-
-        StartCoroutine(gameManager.AllowDrawingOfCards());
+        }        
     }
 
     private void RotateCards(Card card1, Card card2)
@@ -153,5 +158,12 @@ public class CardBattler : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         card.transform.GetChild(4).gameObject.SetActive(true);
+    }
+
+    public IEnumerator AllowDrawingOfCards(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        gameManager.canDrawCards = true;
+        gameManager.EnableDrawButton();
     }
 }

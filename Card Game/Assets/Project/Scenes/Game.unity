@@ -1566,7 +1566,7 @@ MonoBehaviour:
   card2Duration: 0.4
   card3Duration: 0.3
   drawCardsButton: {fileID: 1270492929}
-  currentTurnIsOver: 0
+  canDrawCards: 0
 --- !u!4 &969804889
 Transform:
   m_ObjectHideFlags: 0
@@ -1629,8 +1629,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc52b56adf6deb440a6acea1113b08a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBeforeHitAnimation: 1
-  delayBeforeBattle: 1
+  delayBeforeBattle: 1.1
+  delayBeforeHitAnimation: 1.1
+  delayToAllowDrawingOfCards: 1.5
   shakeIntensity: {x: 0.25, y: 0.25, z: 0.25}
   shakeDuration: 0.4
   shakeDelay: 0
