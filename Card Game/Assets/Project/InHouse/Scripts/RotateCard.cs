@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateCard : MonoBehaviour
 {
     Quaternion targetRotation;
-    float speed = 0.1f;
+    [SerializeField] float rotateSpeed = 0.1f;
     float timeCount = 0.0f;
 
     private void Start()
@@ -16,7 +16,7 @@ public class RotateCard : MonoBehaviour
 
     void Update()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timeCount * speed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timeCount * rotateSpeed);
         timeCount = timeCount + Time.deltaTime;        
     } 
     

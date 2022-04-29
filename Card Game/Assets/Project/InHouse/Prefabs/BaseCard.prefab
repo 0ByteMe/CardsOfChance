@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa945981aca8ca4390c9f70f701b5d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateSpeed: 0.5
 --- !u!114 &998337615640572077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +384,7 @@ MonoBehaviour:
   cardNameText: {fileID: 6894055798161975852}
   cardStrengthPivotPoint: {fileID: 2502343914751291537}
   cardSpritePivotPoint: {fileID: 3004259847609283632}
+  rotateSpeed: 0.5
 --- !u!1 &6868922804886216903
 GameObject:
   m_ObjectHideFlags: 0

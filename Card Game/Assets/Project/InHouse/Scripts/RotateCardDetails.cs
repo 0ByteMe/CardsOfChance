@@ -12,7 +12,7 @@ public class RotateCardDetails : MonoBehaviour
     Quaternion targetStrengthTextRotation;
     Quaternion targetSpriteRotation;
 
-    float speed = 0.1f;
+     [SerializeField] float rotateSpeed = 0.1f;
     float timeCount = 0.0f;
 
     private void Start()
@@ -25,9 +25,9 @@ public class RotateCardDetails : MonoBehaviour
 
     void Update()
     {
-        cardSpritePivotPoint.transform.localRotation = Quaternion.Lerp(cardSpritePivotPoint.transform.localRotation, targetSpriteRotation, timeCount * speed);
-        cardNameText.transform.localRotation = Quaternion.Lerp(cardNameText.transform.localRotation, targetNameTextRotation, timeCount * speed);
-        cardStrengthPivotPoint.transform.localRotation = Quaternion.Lerp(cardStrengthPivotPoint.transform.localRotation, targetStrengthTextRotation, timeCount * speed);
+        cardSpritePivotPoint.transform.localRotation = Quaternion.Lerp(cardSpritePivotPoint.transform.localRotation, targetSpriteRotation, timeCount * rotateSpeed);
+        cardNameText.transform.localRotation = Quaternion.Lerp(cardNameText.transform.localRotation, targetNameTextRotation, timeCount * rotateSpeed);
+        cardStrengthPivotPoint.transform.localRotation = Quaternion.Lerp(cardStrengthPivotPoint.transform.localRotation, targetStrengthTextRotation, timeCount * rotateSpeed);
         timeCount = timeCount + Time.deltaTime;
     }
 
