@@ -23,6 +23,8 @@ public class CardDecks : MonoBehaviour
 
     public IEnumerator RemoveCardsFromDeck(List<Card> deckOfCards)
     {
+        //TODO think about making a delay variable in GameManager and feeding it into here so that you can 
+        //never get cards too fast
         yield return new WaitForSeconds(2f);
 
         deckOfCards.RemoveAt(0);

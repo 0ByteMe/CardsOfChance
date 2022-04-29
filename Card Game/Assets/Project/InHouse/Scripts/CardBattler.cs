@@ -12,8 +12,8 @@ public class CardBattler : MonoBehaviour
     [Header("Timing ")]
     [Tooltip("This is used before first battle as well.")] [Range(0.1f, 3f)] 
     [SerializeField] float delayBetweenEachBattle;
-    [Tooltip("Delay before rotating the entire card.")]
-    [Range(0.1f, 3f)] [SerializeField] float delayToRotatingCard;
+    [Tooltip("Delay before rotating the entire card.")] [Range(0.1f, 3f)]
+    [SerializeField] float delayToRotatingCard;
     [Tooltip("Delay before rotating Sprite + Number + Name.")] [Range(0.1f, 3f)] 
     [SerializeField] float delayToRotatingCardDetails;
     [Tooltip("Delay before playing hit animation + VFX.")] [Range(0.1f, 3f)] 

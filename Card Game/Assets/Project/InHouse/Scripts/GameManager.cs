@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
             StartCoroutine(DrawCardSequence());           
         }
     }
-
     private IEnumerator DrawCardSequence()
     {
         DisableDrawButton();
@@ -137,7 +136,6 @@ public class GameManager : MonoBehaviour
     {
         canDrawCards = false;
     }
-
     private IEnumerator DelayThenAllowFirstDraw(float seconds)
     {
         yield return new WaitForSeconds(seconds);

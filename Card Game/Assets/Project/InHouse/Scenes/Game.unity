@@ -1493,8 +1493,8 @@ GameObject:
   - component: {fileID: 969804889}
   - component: {fileID: 969804888}
   - component: {fileID: 969804892}
-  - component: {fileID: 969804890}
   - component: {fileID: 969804891}
+  - component: {fileID: 969804890}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1520,7 +1520,7 @@ MonoBehaviour:
   enemyBattleCard1: {fileID: 1632898264}
   enemyBattleCard2: {fileID: 1719243549}
   enemyBattleCard3: {fileID: 949517756}
-  Card1PlacementDuration: 0.5
+  Card1PlacementDuration: 0.56
   Card2PlacementDuration: 0.4
   Card3PlacementDuration: 0.3
   drawCardsButton: {fileID: 1270492929}
@@ -1587,14 +1587,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc52b56adf6deb440a6acea1113b08a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: In the 'Timing' section, each option is going to happen one after
-    another in the order you see them in.
-  delayBetweenEachBattle: 1
-  delayToRotatingCard: 0.1
-  delayToRotatingCardDetails: 0.1
-  delayToTakingHit: 0.1
-  delayToBothCardsHits: 0.1
-  delayToAllowDraw: 2
+  description: In the 'Timing' section below, each option is going to happen in succession,
+    not parallel.
+  delayBetweenEachBattle: 0.25
+  delayToRotatingCard: 0.27
+  delayToRotatingCardDetails: 0.41
+  delayToTakingHit: 0.45
+  delayToBothCardsHits: 0.48
+  delayToAllowDraw: 0.4
   shakeIntensity: {x: 0.3, y: 0.3, z: 0.3}
   shakeDuration: 0.35
   shakeDelay: 0
