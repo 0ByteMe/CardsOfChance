@@ -1526,12 +1526,13 @@ MonoBehaviour:
   description: In the 'Timing' section below, each option is going to happen in succession,
     finishing before the next can start.
   delayBeforeFirstBattleStarts: 0.1
-  delayBetweenEachBattle: 0.1
+  delayBetweenEachBattle: 0.3
   delayToRotatingCard: 0.1
   rotateDuration: 0.1
   delayToRotatingCardDetails: 0.01
   delayToTakingHit: 0.1
   delayToBothCardsHits: 0.1
+  delayToWinningCardStartToFall: 2
   shakeIntensity: {x: 0.3, y: 0.3, z: 0.3}
   shakeDuration: 0.1
   shakeDelay: 0
