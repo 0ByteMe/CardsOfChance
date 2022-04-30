@@ -1050,7 +1050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 648250201fabe574b8591ee45cddcf4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.2
+      value: -37.6
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 648250201fabe574b8591ee45cddcf4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1408,14 +1408,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.170214, y: 0.22348621, z: -0.03967058, w: 0.9589095}
-  m_LocalPosition: {x: -2.042, y: 3.836, z: -12.554}
+  m_LocalRotation: {x: 0.35288346, y: 0.21155556, z: -0.082244046, w: 0.9077189}
+  m_LocalPosition: {x: -4.65, y: 5.44, z: -17.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 17.805, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 42.488, y: 26.239, z: 0}
 --- !u!1 &969804887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,11 +1455,12 @@ MonoBehaviour:
   enemyBattleCard1: {fileID: 1632898264}
   enemyBattleCard2: {fileID: 1719243549}
   enemyBattleCard3: {fileID: 949517756}
-  card1PlacementDuration: 0.05
-  card2PlacementDuration: 0.05
-  card3PlacementDuration: 0.05
-  delayBeforeEnemyCardsStartToGetMoved: 0.01
-  delayToAllowDraw: 0.01
+  longestCardPlacementDuration: 0
+  card1PlacementDuration: 0.06
+  card2PlacementDuration: 0.12
+  card3PlacementDuration: 0.24
+  delayBeforeEnemyCardsStartToGetMoved: 0.5
+  delayToAllowDraw: 1
   drawCardsButton: {fileID: 1270492929}
 --- !u!4 &969804889
 Transform:
@@ -1525,13 +1526,13 @@ MonoBehaviour:
   description: In the 'Timing' section below, each option is going to happen in succession,
     finishing before the next can start.
   delayBeforeFirstBattleStarts: 0.01
-  delayBetweenEachBattle: 0.01
-  delayToRotatingCard: 0.01
-  delayToRotatingCardDetails: 0.01
+  delayBetweenEachBattle: 0.02
+  delayToRotatingCard: 0.54
+  delayToRotatingCardDetails: 2.14
   delayToTakingHit: 0.01
   delayToBothCardsHits: 0.01
-  shakeIntensity: {x: 1, y: 1, z: 1}
-  shakeDuration: 1.56
+  shakeIntensity: {x: 0.5, y: 0.5, z: 0.5}
+  shakeDuration: 0.52
   shakeDelay: 0
 --- !u!114 &969804893
 MonoBehaviour:
@@ -2473,6 +2474,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496442659}
   m_CullTransparentMesh: 1
+--- !u!1 &1573470351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: 648250201fabe574b8591ee45cddcf4a, type: 3}
+  m_PrefabInstance: {fileID: 634810663}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1573470355
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573470351}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09365796, y: 0.0938232, z: 0.07822665}
+  m_Center: {x: -0.00002454827, y: -0.0000024492629, z: 0.03597089}
 --- !u!1 &1632898263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2693,7 +2712,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657953539}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.1, y: -24, z: 57.1}
+  m_LocalPosition: {x: -24.1, y: -37, z: 57.1}
   m_LocalScale: {x: 68.53, y: 1, z: 68.53}
   m_ConstrainProportionsScale: 0
   m_Children: []

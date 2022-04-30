@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform enemyBattleCard2;
     [SerializeField] Transform enemyBattleCard3;
     [Header("Timing")]
-    private float longestCardPlacementDuration; 
+    public float longestCardPlacementDuration; 
     [SerializeField] [Range(0.05f, 3f)] float card1PlacementDuration;
     [SerializeField] [Range(0.05f, 3f)] float card2PlacementDuration;
     [SerializeField] [Range(0.05f, 3f)] public float card3PlacementDuration;
@@ -42,7 +42,8 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        //this sets the slowest's cards movement duration to a variable that is used to stop cards being added too quickly
+        //this sets the slowest's cards move duration to a variable
+        //Used to stop cards being added too quickly at the end of Drawing Player/Enemy Cards
         CalculateLongestCardPlacementDuration();
 
         StopAbilityToDrawCards();
@@ -62,10 +63,8 @@ public class GameManager : MonoBehaviour
         else
         {
             longestCardPlacementDuration = card3PlacementDuration;
-        }
-        Debug.Log(longestCardPlacementDuration);
+        }        
     }
-
     public void DrawCards()
     {
         if (canDrawCards)
