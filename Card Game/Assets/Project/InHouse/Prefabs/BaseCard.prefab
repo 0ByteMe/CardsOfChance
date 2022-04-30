@@ -311,7 +311,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4832386455040202776}
   - component: {fileID: 4832386455101783039}
-  - component: {fileID: 2778362957271886532}
   - component: {fileID: 998337615640572077}
   - component: {fileID: 5082842040008833570}
   - component: {fileID: 2005124639363262564}
@@ -358,19 +357,6 @@ MonoBehaviour:
   cardStrengthText: {fileID: 6981204317034799263}
   cardName: 
   cardStrength: 0
---- !u!114 &2778362957271886532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4832386455040202777}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa945981aca8ca4390c9f70f701b5d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 1
 --- !u!114 &998337615640572077
 MonoBehaviour:
   m_ObjectHideFlags: 0

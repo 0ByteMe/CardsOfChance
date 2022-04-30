@@ -1456,9 +1456,9 @@ MonoBehaviour:
   enemyBattleCard2: {fileID: 1719243549}
   enemyBattleCard3: {fileID: 949517756}
   longestCardPlacementDuration: 0
-  card1PlacementDuration: 0.42
-  card2PlacementDuration: 0.27
-  card3PlacementDuration: 0.13
+  card1PlacementDuration: 0.05
+  card2PlacementDuration: 0.05
+  card3PlacementDuration: 0.05
   delayBeforeEnemyCardsStartToGetMoved: 0.01
   delayToAllowDraw: 1
   drawCardsButton: {fileID: 1270492929}
@@ -1528,6 +1528,7 @@ MonoBehaviour:
   delayBeforeFirstBattleStarts: 0.1
   delayBetweenEachBattle: 0.1
   delayToRotatingCard: 0.1
+  rotateDuration: 0.1
   delayToRotatingCardDetails: 0.01
   delayToTakingHit: 0.1
   delayToBothCardsHits: 0.1
