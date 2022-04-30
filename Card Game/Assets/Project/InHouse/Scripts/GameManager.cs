@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [Header("Time to Place Battle Cards")]
     [SerializeField] float Card1PlacementDuration;
     [SerializeField] float Card2PlacementDuration;
-    [SerializeField] float Card3PlacementDuration;
+    [SerializeField] public float Card3PlacementDuration;
 
     [SerializeField] Button drawCardsButton;
     [SerializeField] public bool canDrawCards;

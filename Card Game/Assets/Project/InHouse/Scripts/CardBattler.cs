@@ -8,9 +8,11 @@ public class CardBattler : MonoBehaviour
     [TextArea]
     [SerializeField]
     private string description;
-
+    
     [Header("Timing ")]
-    [Tooltip("This is used before first battle as well.")] [Range(0.1f, 3f)] 
+    [Tooltip("Delay before battle starts after final card is placed.")] [Range(0.1f, 3f)]
+    [SerializeField] float delayBeforeFirstBattleStarts;
+    [Tooltip("Delay between battles.")] [Range(0.1f, 3f)] 
     [SerializeField] float delayBetweenEachBattle;
     [Tooltip("Delay before rotating the entire card.")] [Range(0.1f, 3f)]
     [SerializeField] float delayToRotatingCard;
@@ -39,9 +41,13 @@ public class CardBattler : MonoBehaviour
         gameManager = GetComponent<GameManager>();
     }
 
+    private void Start()
+    {
+        delayBeforeFirstBattleStarts += gameManager.Card3PlacementDuration;
+    }
     public IEnumerator CardBattle()
     {
-       yield return BattleFirstCards();        
+       yield return BattleFirstCards(delayBeforeFirstBattleStarts);        
        yield return BattleSecondCards();        
        yield return BattleThirdCards();
        StartCoroutine(cardDecks.RemoveCardsFromDeck(cardDecks.playerBattleCards));
@@ -50,9 +56,9 @@ public class CardBattler : MonoBehaviour
        yield break;
     }
 
-    private IEnumerator BattleFirstCards()
+    private IEnumerator BattleFirstCards(float delay)
     {
-        yield return DelayBetweenBattle(delayBetweenEachBattle);
+        yield return DelayBetweenBattle(delayBeforeFirstBattleStarts);
 
         //Rotate Cards in battle
         RotateCards(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0]);
