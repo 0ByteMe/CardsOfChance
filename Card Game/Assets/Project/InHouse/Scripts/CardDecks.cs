@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CardDecks : MonoBehaviour
 {
@@ -12,8 +13,16 @@ public class CardDecks : MonoBehaviour
     public List<Card> shuffledEnemyCards;
     [Header("Battle Cards")] [Space(10)]
     public List<Card> playerBattleCards;
-    public List<Card> enemyBattleCards;     
+    public List<Card> enemyBattleCards;
 
+   public void ShuffleCardDecks()
+    {
+        shuffledPlayerCards = new List<Card>();
+        shuffledPlayerCards = playerCards.OrderBy(x => Random.value).ToList();
+
+        shuffledEnemyCards = new List<Card>();
+        shuffledEnemyCards = enemyCards.OrderBy(x => Random.value).ToList();
+    }
     public IEnumerator AddToCurrentBattleCards(List<Card> listToAddTo, Card card1, Card card2, Card card3, float delay)
     {
         listToAddTo.Add(card1);
@@ -30,5 +39,5 @@ public class CardDecks : MonoBehaviour
         deckOfCards.RemoveAt(0);
 
         yield return null;
-    }  
+    }    
 }

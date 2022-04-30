@@ -23,7 +23,7 @@ public class CardSpawner : MonoBehaviour
     private void Start()
     {
         InstantiateCardDecks();
-        ShuffleCardDecks();
+        cardDecks.ShuffleCardDecks();
     }    
     private void InstantiateCardDecks()
     {
@@ -38,14 +38,5 @@ public class CardSpawner : MonoBehaviour
             Card newEnemyCard = Instantiate(prefab, enemyDeckLocation.position, prefab.transform.rotation);
             cardDecks.enemyCards.Add(newEnemyCard);
         }
-    }
-
-    private void ShuffleCardDecks()
-    {
-        cardDecks.shuffledPlayerCards = new List<Card>();
-        cardDecks.shuffledPlayerCards = cardDecks.playerCards.OrderBy(x => Random.value).ToList();
-
-        cardDecks.shuffledEnemyCards = new List<Card>();
-        cardDecks.shuffledEnemyCards = cardDecks.enemyCards.OrderBy(x => Random.value).ToList();
-    }
+    }    
 }
