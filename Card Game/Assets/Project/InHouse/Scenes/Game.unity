@@ -1409,7 +1409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.35288346, y: 0.21155556, z: -0.082244046, w: 0.9077189}
-  m_LocalPosition: {x: -4.65, y: 5.44, z: -17.83}
+  m_LocalPosition: {x: -3.6, y: 6.86, z: -11.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1456,10 +1456,10 @@ MonoBehaviour:
   enemyBattleCard2: {fileID: 1719243549}
   enemyBattleCard3: {fileID: 949517756}
   longestCardPlacementDuration: 0
-  card1PlacementDuration: 0.06
-  card2PlacementDuration: 0.12
-  card3PlacementDuration: 0.24
-  delayBeforeEnemyCardsStartToGetMoved: 0.5
+  card1PlacementDuration: 0.05
+  card2PlacementDuration: 0.05
+  card3PlacementDuration: 0.05
+  delayBeforeEnemyCardsStartToGetMoved: 0.01
   delayToAllowDraw: 1
   drawCardsButton: {fileID: 1270492929}
 --- !u!4 &969804889
@@ -1470,7 +1470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969804887}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -10.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1525,14 +1525,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: In the 'Timing' section below, each option is going to happen in succession,
     finishing before the next can start.
-  delayBeforeFirstBattleStarts: 0.01
-  delayBetweenEachBattle: 0.02
-  delayToRotatingCard: 0.54
-  delayToRotatingCardDetails: 2.14
-  delayToTakingHit: 0.01
-  delayToBothCardsHits: 0.01
-  shakeIntensity: {x: 0.5, y: 0.5, z: 0.5}
-  shakeDuration: 0.52
+  delayBeforeFirstBattleStarts: 0.1
+  delayBetweenEachBattle: 0.1
+  delayToRotatingCard: 0.1
+  delayToRotatingCardDetails: 0.01
+  delayToTakingHit: 0.1
+  delayToBothCardsHits: 0.1
+  shakeIntensity: {x: 0.3, y: 0.3, z: 0.3}
+  shakeDuration: 0.3
   shakeDelay: 0
 --- !u!114 &969804893
 MonoBehaviour:
@@ -2486,7 +2486,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1573470351}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7d83f43502ec4b74482b038c091db44b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

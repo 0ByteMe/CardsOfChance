@@ -25,8 +25,8 @@ public class CardBattler : MonoBehaviour
 
     [Header("Hit Animation")]
     [SerializeField] Vector3 shakeIntensity;
-    [SerializeField] [Range(0.01f, 3f)] float shakeDuration;
-    [SerializeField] [Range(0.01f, 1f)] float shakeDelay;
+    [SerializeField] [Range(0.1f, 2f)] float shakeDuration;
+    [SerializeField] [Range(0.1f, 2f)] float shakeDelay;
 
     private int randomNumber;
     private int lastNumber;
@@ -40,12 +40,7 @@ public class CardBattler : MonoBehaviour
         cardDecks = GetComponent<CardDecks>();
         scoreManager = GetComponent<ScoreManager>();        
         gameManager = GetComponent<GameManager>();
-    }
-
-    private void Start()
-    {
-        delayBeforeFirstBattleStarts += gameManager.longestCardPlacementDuration;
-    }
+    }   
     public IEnumerator CardBattle()
     {
        yield return new WaitForSeconds(delayBeforeFirstBattleStarts);
@@ -67,14 +62,16 @@ public class CardBattler : MonoBehaviour
         {
             //PLAYER WINS POINT                       
             yield return HitSequence(cardDecks.enemyBattleCards[0], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay);
+            StartCardFallingSequence(cardDecks.playerBattleCards[0]);
             StartCardFallingSequence(cardDecks.enemyBattleCards[0]);
-            scoreManager.AddToPlayerScore();            
+            scoreManager.AddToPlayerScore();  
         }
         else if (cardDecks.playerBattleCards[0].CardStrength < cardDecks.enemyBattleCards[0].CardStrength)
         {
             //ENEMY WINS POINT            
             yield return HitSequence(cardDecks.playerBattleCards[0], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay);
-            StartCardFallingSequence(cardDecks.playerBattleCards[0]);
+            StartCardFallingSequence(cardDecks.playerBattleCards[0]);  
+            StartCardFallingSequence(cardDecks.enemyBattleCards[0]);
             scoreManager.AddToEnemyScore();
         }
         else
@@ -82,9 +79,7 @@ public class CardBattler : MonoBehaviour
             //Nobody Wins Point
             yield return HitSequenceForNoWinner(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay);
             StartCardFallingSequence(cardDecks.playerBattleCards[0]);
-            StartCardFallingSequence(cardDecks.enemyBattleCards[0]);
-            yield return DelayBetweenBattle(delayBetweenEachBattle);
-            yield break;
+            StartCardFallingSequence(cardDecks.enemyBattleCards[0]);            
         }
     }
 
@@ -99,25 +94,25 @@ public class CardBattler : MonoBehaviour
         if (cardDecks.playerBattleCards[1].CardStrength > cardDecks.enemyBattleCards[1].CardStrength)
         {
             //Player wins point
-            yield return HitSequence(cardDecks.enemyBattleCards[1], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay);
+            yield return StartCoroutine(HitSequence(cardDecks.enemyBattleCards[1], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay));
+            StartCardFallingSequence(cardDecks.playerBattleCards[1]);
             StartCardFallingSequence(cardDecks.enemyBattleCards[1]);
             scoreManager.AddToPlayerScore();
         }
         else if (cardDecks.playerBattleCards[1].CardStrength < cardDecks.enemyBattleCards[1].CardStrength)
-        {            
+        {
             //Enemy wins point
-            yield return HitSequence(cardDecks.playerBattleCards[1], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay);
+            yield return StartCoroutine(HitSequence(cardDecks.playerBattleCards[1], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay));
             StartCardFallingSequence(cardDecks.playerBattleCards[1]);
+            StartCardFallingSequence(cardDecks.enemyBattleCards[1]);
             scoreManager.AddToEnemyScore();
         }
         else
         {
             //Nobody Wins Point
-            yield return HitSequenceForNoWinner(cardDecks.playerBattleCards[1], cardDecks.enemyBattleCards[1], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay);
+            yield return StartCoroutine(HitSequenceForNoWinner(cardDecks.playerBattleCards[1], cardDecks.enemyBattleCards[1], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay));
             StartCardFallingSequence(cardDecks.playerBattleCards[1]);
             StartCardFallingSequence(cardDecks.enemyBattleCards[1]);
-            yield return DelayBetweenBattle(delayBetweenEachBattle);
-            yield break;
         }
     }
 
@@ -132,25 +127,26 @@ public class CardBattler : MonoBehaviour
         if (cardDecks.playerBattleCards[2].CardStrength > cardDecks.enemyBattleCards[2].CardStrength)
         {
             //Player wins point
-            yield return HitSequence(cardDecks.enemyBattleCards[2], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay);
+            yield return StartCoroutine(HitSequence(cardDecks.enemyBattleCards[2], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay));
+            StartCardFallingSequence(cardDecks.playerBattleCards[2]);
             StartCardFallingSequence(cardDecks.enemyBattleCards[2]);
             scoreManager.AddToPlayerScore();
         }
         else if (cardDecks.playerBattleCards[2].CardStrength < cardDecks.enemyBattleCards[2].CardStrength)
-        {            
+        {
             //Enemy wins point
-            yield return HitSequence(cardDecks.playerBattleCards[2], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay);
+            yield return StartCoroutine(HitSequence(cardDecks.playerBattleCards[2], delayToTakingHit, shakeIntensity, shakeDuration, shakeDelay));
             StartCardFallingSequence(cardDecks.playerBattleCards[2]);
+            StartCardFallingSequence(cardDecks.enemyBattleCards[2]);
             scoreManager.AddToEnemyScore();
         }
         else
         {
             //Nobody Wins Point
-            yield return HitSequenceForNoWinner(cardDecks.playerBattleCards[2], cardDecks.enemyBattleCards[2], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay);
+            yield return StartCoroutine(HitSequenceForNoWinner(cardDecks.playerBattleCards[2], cardDecks.enemyBattleCards[2], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay));
             StartCardFallingSequence(cardDecks.playerBattleCards[2]);
             StartCardFallingSequence(cardDecks.enemyBattleCards[2]);
-            yield break;
-        }        
+        }
     }
 
     private IEnumerator RotateCards(Card card1, Card card2, float delay)
@@ -171,8 +167,13 @@ public class CardBattler : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         card.transform.GetChild(4).gameObject.SetActive(true);
-        Tween.Shake(card.transform, card.transform.position, shakeIntensity, shakeDuration, shakeDelay);
-        yield return new WaitForSeconds(shakeDuration);        
+        Tween.Shake(card.transform, card.transform.position, shakeIntensity, shakeDuration, shakeDelay, Tween.LoopType.None, null);        
+    }
+
+    void HandleTweenFinished(Card card)
+    {
+        card.gameObject.AddComponent<Rigidbody>();
+        card.GetComponent<Rigidbody>().AddTorque(NewRandomNumber(), NewRandomNumber(), NewRandomNumber(), ForceMode.Impulse);
     }
 
     private IEnumerator HitSequenceForNoWinner(Card card1, Card card2, float delayToBothCardsHits, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)
@@ -184,27 +185,32 @@ public class CardBattler : MonoBehaviour
         Tween.Shake(card2.transform, card2.transform.position, shakeIntensity, shakeDuration, shakeDelay);
         yield return new WaitForSeconds(shakeDuration);
     }
-
+    
+    private IEnumerator StartCardFallingSequence(Card card, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        card.gameObject.AddComponent<Rigidbody>();
+        card.GetComponent<Rigidbody>().AddTorque(NewRandomNumber(), NewRandomNumber(), NewRandomNumber(), ForceMode.Impulse);
+    }
+    private void StartCardFallingSequence(Card card)
+    {
+        card.gameObject.AddComponent<Rigidbody>();
+        card.GetComponent<Rigidbody>().AddTorque(NewRandomNumber(), NewRandomNumber(), NewRandomNumber(), ForceMode.Impulse);        
+    }
     private IEnumerator DelayBetweenBattle(float seconds)
     {
         yield return new WaitForSeconds(seconds);        
     }
-
-    private void StartCardFallingSequence(Card card)
+    private int NewRandomNumber()
     {
-        //NewRandomNumber();
-        card.GetComponent<Rigidbody>().isKinematic = false;
-        card.GetComponent<Rigidbody>().AddTorque(Random.Range(50, 100), Random.Range(50, 100), Random.Range(50, 100), ForceMode.Impulse);
-    }
-
-     private void NewRandomNumber()
-    {
-        randomNumber = Random.Range(50, 100);
+        randomNumber = Random.Range(-50, 100);
         if (randomNumber == lastNumber)
         {
-            randomNumber = Random.Range(50, 100);
+            randomNumber = Random.Range(-50, 100);
         }
         lastNumber = randomNumber;
+
+        return randomNumber;
     }
 
 
