@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using DigitalRuby.Tween;
+using Pixelplacement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -81,54 +82,19 @@ public class GameManager : MonoBehaviour
     private IEnumerator DrawPlayerCards(float delayBeforeEnemyCardsArePlaced)
     {
         //Moves card of Shuffled List to Card Battle Position
-        System.Action<ITween<Vector3>> updatePlayerCard1Pos = (t) =>
-        {
-            cardDecks.shuffledPlayerCards[0].transform.position = t.CurrentValue;
-        };
-        TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[0].transform.position, playerBattleCard1.position, card1PlacementDuration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard1Pos);
+        Tween.Position(cardDecks.shuffledPlayerCards[0].transform, playerBattleCard1.position, card1PlacementDuration, 0);
+        Tween.Position(cardDecks.shuffledPlayerCards[1].transform, playerBattleCard2.position, card2PlacementDuration, 0);
+        Tween.Position(cardDecks.shuffledPlayerCards[2].transform, playerBattleCard3.position, card3PlacementDuration, 0);
                 
-
-        //Moves card of Shuffled List to Card Battle Position
-        System.Action<ITween<Vector3>> updatePlayerCard2Pos = (t) =>
-        {
-            cardDecks.shuffledPlayerCards[1].transform.position = t.CurrentValue;
-        };
-        TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[1].transform.position, playerBattleCard2.position, card2PlacementDuration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard2Pos);
-
-
-        //Moves card of Shuffled List to Card Battle Position
-        System.Action<ITween<Vector3>> updatePlayerCard3Pos = (t) =>
-        {
-            cardDecks.shuffledPlayerCards[2].transform.position = t.CurrentValue;
-        };
-        TweenFactory.Tween(null, cardDecks.shuffledPlayerCards[2].transform.position, playerBattleCard3.position, card3PlacementDuration, TweenScaleFunctions.CubicEaseIn, updatePlayerCard3Pos);
-
-        
         yield return cardDecks.AddToCurrentBattleCards(cardDecks.playerBattleCards, cardDecks.shuffledPlayerCards[0], cardDecks.shuffledPlayerCards[1], cardDecks.shuffledPlayerCards[2], longestCardPlacementDuration);
         yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledPlayerCards);           
         yield return new WaitForSeconds(delayBeforeEnemyCardsArePlaced);
     }
     private IEnumerator DrawEnemyCards()
     {
-        System.Action<ITween<Vector3>> updateEnemyCard1Pos = (t) =>
-        {
-            cardDecks.shuffledEnemyCards[0].transform.position = t.CurrentValue;
-        };
-        TweenFactory.Tween(null, cardDecks.shuffledEnemyCards[0].transform.position, enemyBattleCard1.position, card1PlacementDuration , TweenScaleFunctions.CubicEaseIn, updateEnemyCard1Pos);
-
-
-        System.Action<ITween<Vector3>> updateEnemyCard2Pos = (t) =>
-        {
-            cardDecks.shuffledEnemyCards[1].transform.position = t.CurrentValue;
-        };
-        TweenFactory.Tween(null, cardDecks.shuffledEnemyCards[1].transform.position,  enemyBattleCard2.position, card2PlacementDuration, TweenScaleFunctions.CubicEaseIn, updateEnemyCard2Pos);
-
-
-        System.Action<ITween<Vector3>> updateEnemyCard3Pos = (t) =>
-        {
-            cardDecks.shuffledEnemyCards[2].transform.position = t.CurrentValue;
-        };
-        TweenFactory.Tween(null, cardDecks.shuffledEnemyCards[2].transform.position,  enemyBattleCard3.position, card3PlacementDuration, TweenScaleFunctions.CubicEaseIn, updateEnemyCard3Pos);
+        Tween.Position(cardDecks.shuffledEnemyCards[0].transform, enemyBattleCard1.position, card1PlacementDuration, 0);
+        Tween.Position(cardDecks.shuffledEnemyCards[1].transform, enemyBattleCard2.position, card2PlacementDuration, 0);
+        Tween.Position(cardDecks.shuffledEnemyCards[2].transform, enemyBattleCard3.position, card3PlacementDuration, 0);
 
         yield return cardDecks.AddToCurrentBattleCards(cardDecks.enemyBattleCards, cardDecks.shuffledEnemyCards[0], cardDecks.shuffledEnemyCards[1], cardDecks.shuffledEnemyCards[2], longestCardPlacementDuration);
         yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards);           

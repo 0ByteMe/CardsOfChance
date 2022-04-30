@@ -22,7 +22,9 @@ public class CardSpawner : MonoBehaviour
 
     private void Start()
     {
+        //Creates all the cards and places them in Scene
         InstantiateCardDecks();
+        //proceeds to shuffle them into a new shuffled deck
         cardDecks.ShuffleCardDecks();
     }    
     private void InstantiateCardDecks()

@@ -23,7 +23,7 @@ public class CardDecks : MonoBehaviour
         shuffledEnemyCards = new List<Card>();
         shuffledEnemyCards = enemyCards.OrderBy(x => Random.value).ToList();
     }
-    public IEnumerator AddToCurrentBattleCards(List<Card> listToAddTo, Card card1, Card card2, Card card3, float delay)
+   public IEnumerator AddToCurrentBattleCards(List<Card> listToAddTo, Card card1, Card card2, Card card3, float delay)
     {
         listToAddTo.Add(card1);
         listToAddTo.Add(card2);
@@ -31,8 +31,7 @@ public class CardDecks : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
     }
-
-    public IEnumerator RemoveCardsFromDeck(List<Card> deckOfCards)
+   public IEnumerator RemoveCardsFromDeck(List<Card> deckOfCards)
     {
         deckOfCards.RemoveAt(0);
         deckOfCards.RemoveAt(0);
