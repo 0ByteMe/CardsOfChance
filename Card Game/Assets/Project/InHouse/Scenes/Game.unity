@@ -1532,7 +1532,7 @@ MonoBehaviour:
   delayToTakingHit: 0.1
   delayToBothCardsHits: 0.1
   shakeIntensity: {x: 0.3, y: 0.3, z: 0.3}
-  shakeDuration: 0.3
+  shakeDuration: 0.1
   shakeDelay: 0
 --- !u!114 &969804893
 MonoBehaviour:
