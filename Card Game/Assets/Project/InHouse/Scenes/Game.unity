@@ -1408,14 +1408,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.35288346, y: 0.21155556, z: -0.082244046, w: 0.9077189}
-  m_LocalPosition: {x: -3.6, y: 6.86, z: -11.87}
+  m_LocalRotation: {x: 0.21059236, y: 0.2123474, z: -0.046920333, w: 0.95307815}
+  m_LocalPosition: {x: -7.01, y: 4.32, z: -18.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 42.488, y: 26.239, z: 0}
+  m_LocalEulerAnglesHint: {x: 18.735, y: 10.478, z: 0}
 --- !u!1 &969804887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,10 +1456,10 @@ MonoBehaviour:
   enemyBattleCard2: {fileID: 1719243549}
   enemyBattleCard3: {fileID: 949517756}
   longestCardPlacementDuration: 0
-  card1PlacementDuration: 0.05
-  card2PlacementDuration: 0.05
-  card3PlacementDuration: 0.05
-  delayBeforeEnemyCardsStartToGetMoved: 0.01
+  card1PlacementDuration: 0.3
+  card2PlacementDuration: 0.2
+  card3PlacementDuration: 0.1
+  delayBeforeEnemyCardsStartToGetMoved: 0.5
   delayToAllowDraw: 1
   drawCardsButton: {fileID: 1270492929}
 --- !u!4 &969804889
@@ -1525,16 +1525,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: In the 'Timing' section below, each option is going to happen in succession,
     finishing before the next can start.
-  delayBeforeFirstBattleStarts: 0.1
-  delayBetweenEachBattle: 0.3
-  delayToRotatingCard: 0.1
-  rotateDuration: 0.1
+  delayBeforeFirstBattleStarts: 0.5
+  delayBetweenEachBattle: 1
+  delayToRotatingCard: 0.3
+  rotateDuration: 0.71
   delayToRotatingCardDetails: 0.01
-  delayToTakingHit: 0.1
-  delayToBothCardsHits: 0.1
-  delayToWinningCardStartToFall: 2
+  delayToTakingHit: 1
+  delayToBothCardsHits: 1
+  delayToWinningCardStartToFall: 0.7
   shakeIntensity: {x: 0.3, y: 0.3, z: 0.3}
-  shakeDuration: 0.1
+  shakeDuration: 0.3
   shakeDelay: 0
 --- !u!114 &969804893
 MonoBehaviour:
@@ -1555,6 +1555,30 @@ MonoBehaviour:
   - {fileID: 3086908967785472418, guid: 3a6058f43fd722d45b13712af4f33677, type: 3}
   - {fileID: 2215895021944814176, guid: 694582699f796b54a819f02d1fa161d9, type: 3}
   - {fileID: 6508100320185244705, guid: 7e71b8f1dffcf1e4faec5572a029fc8a, type: 3}
+  - {fileID: 836115231033546281, guid: 5ef097b9cf9648e4ba8c47ff7491cda2, type: 3}
+  - {fileID: 6491013608271476863, guid: 1bf3552dddca88b4b936ef429056a2d0, type: 3}
+  - {fileID: 5720625371162654088, guid: ef23fbf0faf471b41954ec3590316fb9, type: 3}
+  - {fileID: 5832700743113444933, guid: 10866ccd1901e444a9b2b926d1c9a119, type: 3}
+  - {fileID: 8705737974934305992, guid: 1419cc0c4aa371849983dd0f715a1e12, type: 3}
+  - {fileID: 4116101140208495243, guid: a3220fa33501f104bb3561fc1bfb06f3, type: 3}
+  - {fileID: 5314607676105769042, guid: 37dcf28d0a290ac49bd111d57357d026, type: 3}
+  - {fileID: 3086908967785472418, guid: 3a6058f43fd722d45b13712af4f33677, type: 3}
+  - {fileID: 2215895021944814176, guid: 694582699f796b54a819f02d1fa161d9, type: 3}
+  - {fileID: 6508100320185244705, guid: 7e71b8f1dffcf1e4faec5572a029fc8a, type: 3}
+  - {fileID: 836115231033546281, guid: 5ef097b9cf9648e4ba8c47ff7491cda2, type: 3}
+  - {fileID: 6491013608271476863, guid: 1bf3552dddca88b4b936ef429056a2d0, type: 3}
+  - {fileID: 5720625371162654088, guid: ef23fbf0faf471b41954ec3590316fb9, type: 3}
+  - {fileID: 5832700743113444933, guid: 10866ccd1901e444a9b2b926d1c9a119, type: 3}
+  - {fileID: 8705737974934305992, guid: 1419cc0c4aa371849983dd0f715a1e12, type: 3}
+  - {fileID: 4116101140208495243, guid: a3220fa33501f104bb3561fc1bfb06f3, type: 3}
+  - {fileID: 5314607676105769042, guid: 37dcf28d0a290ac49bd111d57357d026, type: 3}
+  - {fileID: 3086908967785472418, guid: 3a6058f43fd722d45b13712af4f33677, type: 3}
+  - {fileID: 2215895021944814176, guid: 694582699f796b54a819f02d1fa161d9, type: 3}
+  - {fileID: 6508100320185244705, guid: 7e71b8f1dffcf1e4faec5572a029fc8a, type: 3}
+  - {fileID: 836115231033546281, guid: 5ef097b9cf9648e4ba8c47ff7491cda2, type: 3}
+  - {fileID: 6491013608271476863, guid: 1bf3552dddca88b4b936ef429056a2d0, type: 3}
+  - {fileID: 5720625371162654088, guid: ef23fbf0faf471b41954ec3590316fb9, type: 3}
+  - {fileID: 5832700743113444933, guid: 10866ccd1901e444a9b2b926d1c9a119, type: 3}
   enemyCardPrefabs:
   - {fileID: 8705737974934305992, guid: 1419cc0c4aa371849983dd0f715a1e12, type: 3}
   - {fileID: 4116101140208495243, guid: a3220fa33501f104bb3561fc1bfb06f3, type: 3}
@@ -1562,6 +1586,30 @@ MonoBehaviour:
   - {fileID: 3086908967785472418, guid: 3a6058f43fd722d45b13712af4f33677, type: 3}
   - {fileID: 2215895021944814176, guid: 694582699f796b54a819f02d1fa161d9, type: 3}
   - {fileID: 6508100320185244705, guid: 7e71b8f1dffcf1e4faec5572a029fc8a, type: 3}
+  - {fileID: 836115231033546281, guid: 5ef097b9cf9648e4ba8c47ff7491cda2, type: 3}
+  - {fileID: 6491013608271476863, guid: 1bf3552dddca88b4b936ef429056a2d0, type: 3}
+  - {fileID: 5720625371162654088, guid: ef23fbf0faf471b41954ec3590316fb9, type: 3}
+  - {fileID: 5832700743113444933, guid: 10866ccd1901e444a9b2b926d1c9a119, type: 3}
+  - {fileID: 8705737974934305992, guid: 1419cc0c4aa371849983dd0f715a1e12, type: 3}
+  - {fileID: 4116101140208495243, guid: a3220fa33501f104bb3561fc1bfb06f3, type: 3}
+  - {fileID: 5314607676105769042, guid: 37dcf28d0a290ac49bd111d57357d026, type: 3}
+  - {fileID: 3086908967785472418, guid: 3a6058f43fd722d45b13712af4f33677, type: 3}
+  - {fileID: 2215895021944814176, guid: 694582699f796b54a819f02d1fa161d9, type: 3}
+  - {fileID: 6508100320185244705, guid: 7e71b8f1dffcf1e4faec5572a029fc8a, type: 3}
+  - {fileID: 836115231033546281, guid: 5ef097b9cf9648e4ba8c47ff7491cda2, type: 3}
+  - {fileID: 6491013608271476863, guid: 1bf3552dddca88b4b936ef429056a2d0, type: 3}
+  - {fileID: 5720625371162654088, guid: ef23fbf0faf471b41954ec3590316fb9, type: 3}
+  - {fileID: 5832700743113444933, guid: 10866ccd1901e444a9b2b926d1c9a119, type: 3}
+  - {fileID: 8705737974934305992, guid: 1419cc0c4aa371849983dd0f715a1e12, type: 3}
+  - {fileID: 4116101140208495243, guid: a3220fa33501f104bb3561fc1bfb06f3, type: 3}
+  - {fileID: 5314607676105769042, guid: 37dcf28d0a290ac49bd111d57357d026, type: 3}
+  - {fileID: 3086908967785472418, guid: 3a6058f43fd722d45b13712af4f33677, type: 3}
+  - {fileID: 2215895021944814176, guid: 694582699f796b54a819f02d1fa161d9, type: 3}
+  - {fileID: 6508100320185244705, guid: 7e71b8f1dffcf1e4faec5572a029fc8a, type: 3}
+  - {fileID: 836115231033546281, guid: 5ef097b9cf9648e4ba8c47ff7491cda2, type: 3}
+  - {fileID: 6491013608271476863, guid: 1bf3552dddca88b4b936ef429056a2d0, type: 3}
+  - {fileID: 5720625371162654088, guid: ef23fbf0faf471b41954ec3590316fb9, type: 3}
+  - {fileID: 5832700743113444933, guid: 10866ccd1901e444a9b2b926d1c9a119, type: 3}
   playerDeckLocation: {fileID: 987067178}
   enemyDeckLocation: {fileID: 1927516499}
 --- !u!1 &987067177
@@ -2777,7 +2825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764354127}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.2}
+  m_LocalPosition: {x: 0, y: 5.5, z: 3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2833,7 +2881,7 @@ GameObject:
   m_Layer: 0
   m_Name: Locator
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
@@ -2846,7 +2894,7 @@ Transform:
   m_GameObject: {fileID: 2020853697}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 987067178}
