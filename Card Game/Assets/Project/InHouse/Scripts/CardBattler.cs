@@ -229,7 +229,7 @@ public class CardBattler : MonoBehaviour
         //add randomized force to fling card
         card.gameObject.AddComponent<Rigidbody>();        
         card.GetComponent<Rigidbody>().AddForce(NewRandomNumberForce(), 0, 0, ForceMode.Impulse);
-        card.GetComponent<Rigidbody>().AddTorque(0, NewRandomNumberTorque(), NewRandomNumberTorque(), ForceMode.Impulse);
+        card.GetComponent<Rigidbody>().AddTorque(0, NewRandomNumberTorque() * 100, 0, ForceMode.VelocityChange);
         yield return null; 
     }    
 
@@ -259,10 +259,10 @@ public class CardBattler : MonoBehaviour
     }
     private int NewRandomNumberTorque()
     {
-        randomNumber = Random.Range(100, 500);
+        randomNumber = Random.Range(500, 1000);
         if (randomNumber == lastNumber)
         {
-            randomNumber = Random.Range(100, 500);
+            randomNumber = Random.Range(500, 1000);
         }
         lastNumber = randomNumber;
 
