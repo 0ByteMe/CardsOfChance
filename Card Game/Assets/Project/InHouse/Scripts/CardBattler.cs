@@ -38,6 +38,9 @@ public class CardBattler : MonoBehaviour
     Vector3 targetSpriteRotationAmount = new Vector3(-90, 0, 0);
     Vector3 targetNameTextRotationAmount = new Vector3(-90, 0, 0);
     Vector3 targetStrengthTextRotationAmount = new Vector3(90, 0, 0);
+    Vector3 targetSpriteRotationReturn = new Vector3(90, 0, 0);
+    Vector3 targetNameTextRotationReturn = new Vector3(90, 0, 0);
+    Vector3 targetStrengthTextRotationReturn = new Vector3(-90, 0, 0);
 
 
     CardDecks cardDecks;
@@ -183,7 +186,14 @@ public class CardBattler : MonoBehaviour
         Tween.Rotate(card2.transform.GetChild(2), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
         Tween.Rotate(card2.transform.GetChild(3), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
     }
-    
+    private IEnumerator RotateAllCardDetailsBackDown(Card card1)
+    {        
+        Tween.Rotate(card1.transform.GetChild(1), targetStrengthTextRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(2), targetNameTextRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(3), targetSpriteRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
+        yield return null;
+    }
+
     private IEnumerator HitSequence(Card card, float delay, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)
     {
         yield return new WaitForSeconds(delay);
@@ -204,11 +214,29 @@ public class CardBattler : MonoBehaviour
     
     private IEnumerator StartCardFallingSequence(Card card)
     {
+        //rotate all the cards details back down
+        yield return RotateAllCardDetailsBackDown(card);
+        yield return Delay(rotateCardDetailsDuration);
+        // then play smoke VFX
+        card.transform.GetChild(5).gameObject.SetActive(true);
+        card.transform.GetChild(6).gameObject.SetActive(true);
+        card.transform.GetChild(7).gameObject.SetActive(true);
+        // then make details dissapear
+        card.transform.GetChild(1).gameObject.SetActive(false);
+        card.transform.GetChild(2).gameObject.SetActive(false);
+        card.transform.GetChild(3).gameObject.SetActive(false);
+        yield return Delay(delayToRotatingCard);
         card.gameObject.AddComponent<Rigidbody>();
-        card.GetComponent<Rigidbody>().AddForce(NewRandomNumber(), NewRandomNumber(), NewRandomNumber(), ForceMode.Impulse);
-        card.GetComponent<Rigidbody>().AddTorque(NewRandomNumber(), NewRandomNumber(), NewRandomNumber(), ForceMode.Impulse);
+        card.GetComponent<Rigidbody>().AddForce(NewRandomXNumber(), 0, NewRandomZNumber(), ForceMode.Impulse);
+        card.GetComponent<Rigidbody>().AddTorque(NewRandomXNumber(), 0, NewRandomZNumber(), ForceMode.Impulse);
         yield return null; 
     }    
+
+    private IEnumerator Delay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+    }
+    
     private IEnumerator DelayBetweenBattle(float delay)
     {
         yield return new WaitForSeconds(delay);        
@@ -217,12 +245,23 @@ public class CardBattler : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
     }
-    private int NewRandomNumber()
+    private int NewRandomXNumber()
     {
         randomNumber = Random.Range(-2, 2);
         if (randomNumber == lastNumber)
         {
             randomNumber = Random.Range(-2, 2);
+        }
+        lastNumber = randomNumber;
+
+        return randomNumber;
+    }
+    private int NewRandomZNumber()
+    {
+        randomNumber = Random.Range(-1, 1);
+        if (randomNumber == lastNumber)
+        {
+            randomNumber = Random.Range(-1, 1);
         }
         lastNumber = randomNumber;
 
