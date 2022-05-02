@@ -175,7 +175,6 @@ public class CardBattler : MonoBehaviour
         Tween.Rotate(card1.transform, rotationAmount, Space.World, rotateDuration, 0, Tween.EaseInOutStrong);
         Tween.Rotate(card2.transform, rotationAmount, Space.World, rotateDuration, 0, Tween.EaseInOutStrong);
     }
-
     private IEnumerator DelayThenRotateAllCardDetails(Card card1, Card card2, float delayBeforeRotating)
     {
         yield return new WaitForSeconds(delayBeforeRotating);
@@ -193,7 +192,6 @@ public class CardBattler : MonoBehaviour
         Tween.Rotate(card1.transform.GetChild(3), targetSpriteRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
         yield return null;
     }
-
     private IEnumerator HitSequence(Card card, float delay, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)
     {
         yield return new WaitForSeconds(delay);
@@ -201,7 +199,6 @@ public class CardBattler : MonoBehaviour
         Tween.Shake(card.transform, card.transform.position, shakeIntensity, shakeDuration, shakeDelay, Tween.LoopType.None);
         yield return new WaitForSeconds(shakeDuration);
     }  
-
     private IEnumerator HitSequenceForNoWinner(Card card1, Card card2, float delayToBothCardsHits, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)
     {
         yield return new WaitForSeconds(delayToBothCardsHits);
@@ -210,8 +207,7 @@ public class CardBattler : MonoBehaviour
         card2.transform.GetChild(4).gameObject.SetActive(true);
         Tween.Shake(card2.transform, card2.transform.position, shakeIntensity, shakeDuration, shakeDelay);
         yield return new WaitForSeconds(shakeDuration);
-    }
-    
+    }    
     private IEnumerator StartCardFallingSequence(Card card)
     {
         //rotate all the cards details back down
@@ -228,16 +224,14 @@ public class CardBattler : MonoBehaviour
         yield return Delay(rotateCardDetailsDuration);
         //add randomized force to fling card
         card.gameObject.AddComponent<Rigidbody>();        
-        card.GetComponent<Rigidbody>().AddForce(NewRandomNumberForce(), 0, 0, ForceMode.Impulse);
-        card.GetComponent<Rigidbody>().AddTorque(0, NewRandomNumberTorque() * 100, 0, ForceMode.VelocityChange);
+        card.GetComponent<Rigidbody>().AddForce(NewRandomNumberForce(), 0, NewRandomNumberForce(), ForceMode.Impulse);
+        card.GetComponent<Rigidbody>().AddTorque(NewRandomNumberTorque(), 0, NewRandomNumberTorque(), ForceMode.Impulse);
         yield return null; 
     }    
-
     private IEnumerator Delay(float delay)
     {
         yield return new WaitForSeconds(delay);
-    }
-    
+    }    
     private IEnumerator DelayBetweenBattle(float delay)
     {
         yield return new WaitForSeconds(delay);        
@@ -248,10 +242,10 @@ public class CardBattler : MonoBehaviour
     }
     private int NewRandomNumberForce()
     {
-        randomNumber = Random.Range(-2, 2);
+        randomNumber = Random.Range(-1, 4);
         if (randomNumber == lastNumber)
         {
-            randomNumber = Random.Range(-2, 2);
+            randomNumber = Random.Range(-1, 4);
         }
         lastNumber = randomNumber;
 
@@ -259,10 +253,10 @@ public class CardBattler : MonoBehaviour
     }
     private int NewRandomNumberTorque()
     {
-        randomNumber = Random.Range(500, 1000);
+        randomNumber = Random.Range(150, 500);
         if (randomNumber == lastNumber)
         {
-            randomNumber = Random.Range(500, 1000);
+            randomNumber = Random.Range(150, 500);
         }
         lastNumber = randomNumber;
 
