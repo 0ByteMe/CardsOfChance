@@ -94,8 +94,8 @@ public class CardBattler : MonoBehaviour
         {
             //Nobody Wins Point
             yield return HitSequenceForNoWinner(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay);
-            yield return StartCardFallingSequence(cardDecks.playerBattleCards[0]);
-            yield return StartCardFallingSequence(cardDecks.enemyBattleCards[0]);            
+            StartCoroutine(StartCardFallingSequence(cardDecks.playerBattleCards[0]));
+            StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[0]));            
         }
     }
 
@@ -129,8 +129,8 @@ public class CardBattler : MonoBehaviour
         {
             //Nobody Wins Point
             yield return StartCoroutine(HitSequenceForNoWinner(cardDecks.playerBattleCards[1], cardDecks.enemyBattleCards[1], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay));
-            yield return StartCardFallingSequence(cardDecks.playerBattleCards[1]);
-            yield return StartCardFallingSequence(cardDecks.enemyBattleCards[1]);
+            StartCoroutine(StartCardFallingSequence(cardDecks.playerBattleCards[1]));
+            StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[1]));
         }
     }
 
@@ -164,8 +164,8 @@ public class CardBattler : MonoBehaviour
         {
             //Nobody Wins Point
             yield return StartCoroutine(HitSequenceForNoWinner(cardDecks.playerBattleCards[2], cardDecks.enemyBattleCards[2], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay));
-            yield return StartCardFallingSequence(cardDecks.playerBattleCards[2]);
-            yield return StartCardFallingSequence(cardDecks.enemyBattleCards[2]);
+            StartCoroutine(StartCardFallingSequence(cardDecks.playerBattleCards[2]));
+            StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[2]));
         }
     }
 
@@ -223,6 +223,7 @@ public class CardBattler : MonoBehaviour
         card.transform.GetChild(3).gameObject.SetActive(false);
         yield return Delay(rotateCardDetailsDuration);
         //add randomized force to fling card
+        card.gameObject.AddComponent<BoxCollider>().size = new Vector3(2, 3.5f, 0.05f);
         card.gameObject.AddComponent<Rigidbody>();        
         card.GetComponent<Rigidbody>().AddForce(NewRandomNumberForce(), 0, NewRandomNumberForce(), ForceMode.Impulse);
         card.GetComponent<Rigidbody>().AddTorque(NewRandomNumberTorque(), 0, NewRandomNumberTorque(), ForceMode.Impulse);
