@@ -18,6 +18,7 @@ public class CardBattler : MonoBehaviour
     [SerializeField] [Range(0.1f, 3f)] float rotateDuration;
     [Tooltip("Delay before rotating Sprite + Number + Name.")] 
     [SerializeField] [Range(0.01f, 3f)] float delayToRotatingCardDetails;
+    [SerializeField] [Range(0.01f, 3f)] float rotateCardDetailsDuration;
     [Tooltip("Delay before playing hit animation + VFX.")] 
     [SerializeField] [Range(0.1f, 3f)] float delayToTakingHit;
     [Tooltip("Delay before both cards taking a hit if its a draw.")] 
@@ -33,6 +34,11 @@ public class CardBattler : MonoBehaviour
     private int randomNumber;
     private int lastNumber;
     Vector3 rotationAmount = new Vector3(0, 0, -180);
+
+    Vector3 targetSpriteRotationAmount = new Vector3(-90, 0, 0);
+    Vector3 targetNameTextRotationAmount = new Vector3(-90, 0, 0);
+    Vector3 targetStrengthTextRotationAmount = new Vector3(90, 0, 0);
+
 
     CardDecks cardDecks;
     ScoreManager scoreManager;
@@ -170,8 +176,12 @@ public class CardBattler : MonoBehaviour
     private IEnumerator DelayThenRotateAllCardDetails(Card card1, Card card2, float delayBeforeRotating)
     {
         yield return new WaitForSeconds(delayBeforeRotating);
-        card1.GetComponent<RotateCardDetails>().enabled = true;
-        card2.GetComponent<RotateCardDetails>().enabled = true;
+        Tween.Rotate(card1.transform.GetChild(1), targetStrengthTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(2), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(3), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card2.transform.GetChild(1), targetStrengthTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card2.transform.GetChild(2), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card2.transform.GetChild(3), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
     }
     
     private IEnumerator HitSequence(Card card, float delay, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)

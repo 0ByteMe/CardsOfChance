@@ -1460,7 +1460,7 @@ MonoBehaviour:
   card2PlacementDuration: 0.05
   card3PlacementDuration: 0.05
   delayBeforeEnemyCardsStartToGetMoved: 0.01
-  delayToAllowDraw: 0.2
+  delayToAllowDraw: 0.01
   drawCardsButton: {fileID: 1270492929}
 --- !u!4 &969804889
 Transform:
@@ -1528,8 +1528,9 @@ MonoBehaviour:
   delayBeforeFirstBattleStarts: 0.1
   delayBetweenEachBattle: 0.1
   delayToRotatingCard: 0.1
-  rotateDuration: 0.1
+  rotateDuration: 0.13
   delayToRotatingCardDetails: 0.01
+  rotateCardDetailsDuration: 0.01
   delayToTakingHit: 0.1
   delayToBothCardsHits: 0.1
   delayToWinningCardStartToFall: 0.1
