@@ -217,18 +217,19 @@ public class CardBattler : MonoBehaviour
         //rotate all the cards details back down
         yield return RotateAllCardDetailsBackDown(card);
         yield return Delay(rotateCardDetailsDuration);
-        // then play smoke VFX
+        // play smoke VFX
         card.transform.GetChild(5).gameObject.SetActive(true);
         card.transform.GetChild(6).gameObject.SetActive(true);
         card.transform.GetChild(7).gameObject.SetActive(true);
-        // then make details dissapear
+        // make details dissapear
         card.transform.GetChild(1).gameObject.SetActive(false);
         card.transform.GetChild(2).gameObject.SetActive(false);
         card.transform.GetChild(3).gameObject.SetActive(false);
-        yield return Delay(delayToRotatingCard);
-        card.gameObject.AddComponent<Rigidbody>();
-        card.GetComponent<Rigidbody>().AddForce(NewRandomXNumber(), 0, NewRandomZNumber(), ForceMode.Impulse);
-        card.GetComponent<Rigidbody>().AddTorque(NewRandomXNumber(), 0, NewRandomZNumber(), ForceMode.Impulse);
+        yield return Delay(rotateCardDetailsDuration);
+        //add randomized force to fling card
+        card.gameObject.AddComponent<Rigidbody>();        
+        card.GetComponent<Rigidbody>().AddForce(NewRandomNumberForce(), 0, 0, ForceMode.Impulse);
+        card.GetComponent<Rigidbody>().AddTorque(0, NewRandomNumberTorque(), NewRandomNumberTorque(), ForceMode.Impulse);
         yield return null; 
     }    
 
@@ -245,7 +246,7 @@ public class CardBattler : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
     }
-    private int NewRandomXNumber()
+    private int NewRandomNumberForce()
     {
         randomNumber = Random.Range(-2, 2);
         if (randomNumber == lastNumber)
@@ -256,12 +257,12 @@ public class CardBattler : MonoBehaviour
 
         return randomNumber;
     }
-    private int NewRandomZNumber()
+    private int NewRandomNumberTorque()
     {
-        randomNumber = Random.Range(-1, 1);
+        randomNumber = Random.Range(100, 500);
         if (randomNumber == lastNumber)
         {
-            randomNumber = Random.Range(-1, 1);
+            randomNumber = Random.Range(100, 500);
         }
         lastNumber = randomNumber;
 
