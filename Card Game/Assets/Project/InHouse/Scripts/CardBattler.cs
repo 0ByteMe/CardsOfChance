@@ -205,6 +205,7 @@ public class CardBattler : MonoBehaviour
     private IEnumerator StartCardFallingSequence(Card card)
     {
         card.gameObject.AddComponent<Rigidbody>();
+        card.GetComponent<Rigidbody>().AddForce(NewRandomNumber(), NewRandomNumber(), NewRandomNumber(), ForceMode.Impulse);
         card.GetComponent<Rigidbody>().AddTorque(NewRandomNumber(), NewRandomNumber(), NewRandomNumber(), ForceMode.Impulse);
         yield return null; 
     }    
@@ -218,10 +219,10 @@ public class CardBattler : MonoBehaviour
     }
     private int NewRandomNumber()
     {
-        randomNumber = Random.Range(-50, 100);
+        randomNumber = Random.Range(-2, 2);
         if (randomNumber == lastNumber)
         {
-            randomNumber = Random.Range(-50, 100);
+            randomNumber = Random.Range(-2, 2);
         }
         lastNumber = randomNumber;
 
