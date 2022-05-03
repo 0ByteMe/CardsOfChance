@@ -183,9 +183,11 @@ public class CardBattler : MonoBehaviour
     private IEnumerator DelayThenRotateAllCardDetails(Card card1, Card card2, float delayBeforeRotating)
     {
         yield return new WaitForSeconds(delayBeforeRotating);
+        card1.transform.GetChild(7).gameObject.SetActive(true);
         Tween.Rotate(card1.transform.GetChild(1), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
         Tween.Rotate(card1.transform.GetChild(2), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
         Tween.Rotate(card1.transform.GetChild(7), new Vector3(90,0,0), Space.Self, rotateCardDetailsDuration, 0);
+        card2.transform.GetChild(7).gameObject.SetActive(true);
         Tween.Rotate(card2.transform.GetChild(1), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
         Tween.Rotate(card2.transform.GetChild(2), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
         Tween.Rotate(card2.transform.GetChild(7), new Vector3(90, 0, 0), Space.Self, rotateCardDetailsDuration, 0);

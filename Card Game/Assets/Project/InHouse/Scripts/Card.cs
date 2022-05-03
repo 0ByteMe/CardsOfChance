@@ -26,10 +26,13 @@ public class Card : MonoBehaviour
         if (isPlayer)
         {
             cardPlayerOrEnemyText.text = player;
+            cardPlayerOrEnemyText.color = Color.green;
         }
         else
         {
             cardPlayerOrEnemyText.text = enemy;
+            cardPlayerOrEnemyText.color = Color.red;
+
         }
     }
 
