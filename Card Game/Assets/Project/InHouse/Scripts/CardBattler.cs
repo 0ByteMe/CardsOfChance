@@ -67,10 +67,11 @@ public class CardBattler : MonoBehaviour
     private IEnumerator BattleFirstCards()
     {        
         
-        yield return RotateCards(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], delayToRotatingCard);
+        yield return RotateCards(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], delayToRotatingCard);        
         
-        //TODO convert rotating the card details to using a tween, probably use Space.Self
         yield return DelayThenRotateAllCardDetails(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], delayToRotatingCardDetails);
+
+        yield return DelayThenShowCardStrengthPlayVFX(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], rotateCardDetailsDuration);
             
         if (cardDecks.playerBattleCards[0].CardStrength > cardDecks.enemyBattleCards[0].CardStrength)
         {
@@ -106,7 +107,9 @@ public class CardBattler : MonoBehaviour
         yield return RotateCards(cardDecks.playerBattleCards[1], cardDecks.enemyBattleCards[1], delayToRotatingCard);
         
         yield return DelayThenRotateAllCardDetails(cardDecks.playerBattleCards[1], cardDecks.enemyBattleCards[1], delayToRotatingCardDetails);
-             
+
+        yield return DelayThenShowCardStrengthPlayVFX(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], rotateCardDetailsDuration);
+
         if (cardDecks.playerBattleCards[1].CardStrength > cardDecks.enemyBattleCards[1].CardStrength)
         {
             //Player wins point
@@ -141,7 +144,9 @@ public class CardBattler : MonoBehaviour
         yield return RotateCards(cardDecks.playerBattleCards[2], cardDecks.enemyBattleCards[2], delayToRotatingCard);
         
         yield return DelayThenRotateAllCardDetails(cardDecks.playerBattleCards[2], cardDecks.enemyBattleCards[2], delayToRotatingCardDetails);
-            
+
+        yield return DelayThenShowCardStrengthPlayVFX(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], rotateCardDetailsDuration);
+
         if (cardDecks.playerBattleCards[2].CardStrength > cardDecks.enemyBattleCards[2].CardStrength)
         {
             //Player wins point
@@ -178,18 +183,31 @@ public class CardBattler : MonoBehaviour
     private IEnumerator DelayThenRotateAllCardDetails(Card card1, Card card2, float delayBeforeRotating)
     {
         yield return new WaitForSeconds(delayBeforeRotating);
-        Tween.Rotate(card1.transform.GetChild(1), targetStrengthTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
-        Tween.Rotate(card1.transform.GetChild(2), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
-        Tween.Rotate(card1.transform.GetChild(3), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
-        Tween.Rotate(card2.transform.GetChild(1), targetStrengthTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
-        Tween.Rotate(card2.transform.GetChild(2), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
-        Tween.Rotate(card2.transform.GetChild(3), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        //Tween.Rotate(card1.transform.GetChild(1), targetStrengthTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(1), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(2), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(7), new Vector3(90,0,0), Space.Self, rotateCardDetailsDuration, 0);
+        //Tween.Rotate(card2.transform.GetChild(1), targetStrengthTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card2.transform.GetChild(1), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card2.transform.GetChild(2), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card2.transform.GetChild(7), new Vector3(90, 0, 0), Space.Self, rotateCardDetailsDuration, 0);
+
+    }
+
+    private IEnumerator DelayThenShowCardStrengthPlayVFX(Card card1, Card card2, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        card1.transform.GetChild(2).GetChild(0).gameObject.SetActive(true);
+        //card1.transform.GetChild(4).gameObject.SetActive(true);
+        card2.transform.GetChild(2).GetChild(0).gameObject.SetActive(true);
+        //card2.transform.GetChild(4).gameObject.SetActive(true);
     }
     private IEnumerator RotateAllCardDetailsBackDown(Card card1)
     {        
-        Tween.Rotate(card1.transform.GetChild(1), targetStrengthTextRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
-        Tween.Rotate(card1.transform.GetChild(2), targetNameTextRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
-        Tween.Rotate(card1.transform.GetChild(3), targetSpriteRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
+        //Tween.Rotate(card1.transform.GetChild(1), targetStrengthTextRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(1), targetNameTextRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(2), targetSpriteRotationReturn, Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(7), new Vector3(-90, 0, 0), Space.Self, rotateCardDetailsDuration, 0);
         yield return null;
     }
     private IEnumerator HitSequence(Card card, float delay, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)
@@ -221,6 +239,7 @@ public class CardBattler : MonoBehaviour
         card.transform.GetChild(1).gameObject.SetActive(false);
         card.transform.GetChild(2).gameObject.SetActive(false);
         card.transform.GetChild(3).gameObject.SetActive(false);
+        card.transform.GetChild(8).gameObject.SetActive(false);
         yield return Delay(rotateCardDetailsDuration);
         //add randomized force to fling card
         card.gameObject.AddComponent<BoxCollider>().size = new Vector3(2, 3.5f, 0.05f);

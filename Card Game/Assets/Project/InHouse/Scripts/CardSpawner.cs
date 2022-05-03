@@ -32,12 +32,13 @@ public class CardSpawner : MonoBehaviour
         foreach (Card prefab in playerCardPrefabs)
         {
            Card newPlayerCard = Instantiate(prefab, playerDeckLocation.position, prefab.transform.rotation);
+           newPlayerCard.isPlayer = true;
            cardDecks.playerCards.Add(newPlayerCard);
         }
 
         foreach (Card prefab in enemyCardPrefabs)
         {
-            Card newEnemyCard = Instantiate(prefab, enemyDeckLocation.position, prefab.transform.rotation);
+            Card newEnemyCard = Instantiate(prefab, enemyDeckLocation.position, prefab.transform.rotation);            
             cardDecks.enemyCards.Add(newEnemyCard);
         }
     }    
