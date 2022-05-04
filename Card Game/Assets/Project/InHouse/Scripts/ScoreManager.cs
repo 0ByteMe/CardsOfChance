@@ -17,6 +17,22 @@ public class ScoreManager : MonoBehaviour
         enemyScore = 0;
     }
 
+    public int PlayerScore
+    {
+        get
+        {
+            return playerScore;
+        }
+    }
+
+    public int EnemyScore
+    {
+        get
+        {
+            return enemyScore;
+        }
+    }
+
     public void AddToEnemyScore()
     {
         enemyScore += 1;

@@ -15,26 +15,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform enemyBattleCard2;
     [SerializeField] Transform enemyBattleCard3;
     [Header("Timing")]
-    public float longestCardPlacementDuration; 
+    public float longestCardPlacementDuration;
     [SerializeField] [Range(0.05f, 3f)] float card1PlacementDuration;
     [SerializeField] [Range(0.05f, 3f)] float card2PlacementDuration;
     [SerializeField] [Range(0.05f, 3f)] public float card3PlacementDuration;
     [Space(20)]
-    [Tooltip("Delay before enemy cards can start to move after all 3 of the player's are placed.")] 
-    [SerializeField] [Range(0.01f, 3f)] float delayBeforeEnemyCardsStartToGetMoved;        
-    [Tooltip("Delay before the player can click Draw after all battles are completed.")] 
+    [Tooltip("Delay before enemy cards can start to move after all 3 of the player's are placed.")]
+    [SerializeField] [Range(0.01f, 3f)] float delayBeforeEnemyCardsStartToGetMoved;
+    [Tooltip("Delay before the player can click Draw after all battles are completed.")]
     [SerializeField] [Range(0.01f, 3f)] public float delayToAllowDraw;
     [Space(20)]
     [SerializeField] Button drawCardsButton;
 
     bool canDrawCards;
-    
+
     ScoreManager scoreManager;
     CardDecks cardDecks;
     CardBattler cardBattler;
 
     private void Awake()
-    {        
+    {
         scoreManager = GetComponent<ScoreManager>();
         cardDecks = GetComponent<CardDecks>();
         cardBattler = GetComponent<CardBattler>();
@@ -62,13 +62,13 @@ public class GameManager : MonoBehaviour
         else
         {
             longestCardPlacementDuration = card3PlacementDuration;
-        }        
+        }
     }
     public void DrawCards()
     {
         if (canDrawCards)
         {
-            StartCoroutine(DrawCardSequence());           
+            StartCoroutine(DrawCardSequence());
         }
     }
     private IEnumerator DrawCardSequence()
@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         yield return DrawPlayerCards(delayBeforeEnemyCardsStartToGetMoved);
         yield return DrawEnemyCards();
         yield return cardBattler.CardBattle();
+        WinOrLoseGame();
     }
 
     private IEnumerator DrawPlayerCards(float delayBeforeEnemyCardsArePlaced)
@@ -85,9 +86,9 @@ public class GameManager : MonoBehaviour
         Tween.Position(cardDecks.shuffledPlayerCards[0].transform, playerBattleCard1.position, card1PlacementDuration, 0);
         Tween.Position(cardDecks.shuffledPlayerCards[1].transform, playerBattleCard2.position, card2PlacementDuration, 0);
         Tween.Position(cardDecks.shuffledPlayerCards[2].transform, playerBattleCard3.position, card3PlacementDuration, 0);
-                
+
         yield return cardDecks.AddToCurrentBattleCards(cardDecks.playerBattleCards, cardDecks.shuffledPlayerCards[0], cardDecks.shuffledPlayerCards[1], cardDecks.shuffledPlayerCards[2], longestCardPlacementDuration);
-        yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledPlayerCards);           
+        yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledPlayerCards);
         yield return new WaitForSeconds(delayBeforeEnemyCardsArePlaced);
     }
     private IEnumerator DrawEnemyCards()
@@ -97,29 +98,47 @@ public class GameManager : MonoBehaviour
         Tween.Position(cardDecks.shuffledEnemyCards[2].transform, enemyBattleCard3.position, card3PlacementDuration, 0);
 
         yield return cardDecks.AddToCurrentBattleCards(cardDecks.enemyBattleCards, cardDecks.shuffledEnemyCards[0], cardDecks.shuffledEnemyCards[1], cardDecks.shuffledEnemyCards[2], longestCardPlacementDuration);
-        yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards);           
+        yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards);
     }
 
     public IEnumerator AllowDrawingOfCards(float delay)
     {
         yield return new WaitForSeconds(delay);
         canDrawCards = true;
-        EnableDrawButton();        
-    }   
+        EnableDrawButton();
+    }
     public void StopAbilityToDrawCards()
     {
         canDrawCards = false;
-        DisableDrawButton();        
-    } 
+        DisableDrawButton();
+    }
     public void EnableDrawButton()
     {
-        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;        
+        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
         drawCardsButton.enabled = true;
-    }  
+    }
     private void DisableDrawButton()
     {
-        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;        
-        drawCardsButton.enabled = false;        
+        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+        drawCardsButton.enabled = false;
     }
-    
+
+    private void WinOrLoseGame()
+    {
+        if(scoreManager.PlayerScore == scoreManager.EnemyScore)
+        {
+            //ShowTieGameSequence();
+        }
+        else if(scoreManager.PlayerScore > scoreManager.EnemyScore)
+        {
+            //ShowWinGameSequence();
+        }
+        else
+        {
+            //ShowLoseGameSequence();
+        }
+
+
+
+    }
 }

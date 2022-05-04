@@ -277,11 +277,5 @@ public class CardBattler : MonoBehaviour
         lastNumber = randomNumber;
 
         return randomNumber;
-    }
-
-    private string AddTwoNumbers(int numberOne, int numberTwo)
-    {
-        string totalSum = numberOne.ToString() + numberTwo.ToString();
-        return totalSum;
-    }
+    }    
 }
