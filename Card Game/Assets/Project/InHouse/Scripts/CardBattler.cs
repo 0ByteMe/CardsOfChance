@@ -89,7 +89,7 @@ public class CardBattler : MonoBehaviour
             yield return StartCardFallingSequence(cardDecks.playerBattleCards[0]);
             yield return DelayBetweenDroppingCards(delayToWinningCardStartToFall);
             yield return StartCardFallingSequence(cardDecks.enemyBattleCards[0]);
-            scoreManager.AddToEnemyScore();
+            scoreManager.AddToEnemyScore();            
         }
         else
         {
@@ -192,7 +192,6 @@ public class CardBattler : MonoBehaviour
         Tween.Rotate(card2.transform.GetChild(2), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
         Tween.Rotate(card2.transform.GetChild(7), new Vector3(90, 0, 0), Space.Self, rotateCardDetailsDuration, 0);
     }
-
     private IEnumerator DelayThenShowCardStrengthPlayVFX(Card card1, Card card2, float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -280,5 +279,9 @@ public class CardBattler : MonoBehaviour
         return randomNumber;
     }
 
-
+    private string AddTwoNumbers(int numberOne, int numberTwo)
+    {
+        string totalSum = numberOne.ToString() + numberTwo.ToString();
+        return totalSum;
+    }
 }
