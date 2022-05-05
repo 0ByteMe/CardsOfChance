@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] [Range(0.01f, 3f)] public float delayToAllowDraw;
     [Space(20)]
     [SerializeField] Button drawCardsButton;
+    [SerializeField] private Spline cameraSpline;
+    [SerializeField] Transform myCamera;
+    [SerializeField] GameObject startScreen;
 
     bool canDrawCards;
 
@@ -41,12 +44,18 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        myCamera.transform.position = new Vector3(-0.008f, 5.681f, -25.52f);
         //this sets the slowest's cards move duration to a variable
         //Used to stop cards being added too quickly at the end of Drawing Player/Enemy Cards
         CalculateLongestCardPlacementDuration();
 
         StopAbilityToDrawCards();
         StartCoroutine(AllowDrawingOfCards(delayToAllowDraw));
+    }
+    public void StartGame()
+    {
+        Tween.Spline(cameraSpline, myCamera, 0, 1f, false, 5f, 0, Tween.EaseInOut, Tween.LoopType.None);        
+        startScreen.SetActive(false);
     }
 
     private void CalculateLongestCardPlacementDuration()
@@ -100,7 +109,6 @@ public class GameManager : MonoBehaviour
         yield return cardDecks.AddToCurrentBattleCards(cardDecks.enemyBattleCards, cardDecks.shuffledEnemyCards[0], cardDecks.shuffledEnemyCards[1], cardDecks.shuffledEnemyCards[2], longestCardPlacementDuration);
         yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards);
     }
-
     public IEnumerator AllowDrawingOfCards(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -122,7 +130,6 @@ public class GameManager : MonoBehaviour
         drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
         drawCardsButton.enabled = false;
     }
-
     private void WinOrLoseGame()
     {
         if(scoreManager.PlayerScore == scoreManager.EnemyScore)

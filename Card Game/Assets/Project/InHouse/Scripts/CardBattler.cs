@@ -31,6 +31,9 @@ public class CardBattler : MonoBehaviour
     [SerializeField] [Range(0.1f, 2f)] float shakeDuration;
     [SerializeField] [Range(0.1f, 2f)] float shakeDelay;
 
+    [SerializeField] private Spline cameraSpline;
+    [SerializeField] Transform myCamera;
+
     private int randomNumber;
     private int lastNumber;
     Vector3 rotationAmount = new Vector3(0, 0, -180);
@@ -41,7 +44,6 @@ public class CardBattler : MonoBehaviour
     Vector3 targetSpriteRotationReturn = new Vector3(90, 0, 0);
     Vector3 targetNameTextRotationReturn = new Vector3(90, 0, 0);
     Vector3 targetStrengthTextRotationReturn = new Vector3(-90, 0, 0);
-
 
     CardDecks cardDecks;
     ScoreManager scoreManager;
@@ -65,8 +67,9 @@ public class CardBattler : MonoBehaviour
     }
 
     private IEnumerator BattleFirstCards()
-    {        
-        
+    {
+        Tween.Spline(cameraSpline, myCamera, 0, .3f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
+
         yield return RotateCards(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], delayToRotatingCard);        
         
         yield return DelayThenRotateAllCardDetails(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], delayToRotatingCardDetails);
@@ -102,6 +105,8 @@ public class CardBattler : MonoBehaviour
 
     private IEnumerator BattleSecondCards()
     {
+        Tween.Spline(cameraSpline, myCamera, .3f, .6f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
+
         yield return DelayBetweenBattle(delayBetweenEachBattle);
 
         yield return RotateCards(cardDecks.playerBattleCards[1], cardDecks.enemyBattleCards[1], delayToRotatingCard);
@@ -139,6 +144,8 @@ public class CardBattler : MonoBehaviour
 
     private IEnumerator BattleThirdCards()
     {
+        Tween.Spline(cameraSpline, myCamera, .6f, 1f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
+
         yield return DelayBetweenBattle(delayBetweenEachBattle);
 
         yield return RotateCards(cardDecks.playerBattleCards[2], cardDecks.enemyBattleCards[2], delayToRotatingCard);
@@ -172,6 +179,9 @@ public class CardBattler : MonoBehaviour
             StartCoroutine(StartCardFallingSequence(cardDecks.playerBattleCards[2]));
             StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[2]));
         }
+
+        Tween.Spline(cameraSpline, myCamera, 1f, 0f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
+
     }
 
     private IEnumerator RotateCards(Card card1, Card card2, float delay)

@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4923900619231589510}
-  m_LocalRotation: {x: 0.21059236, y: 0.2123474, z: -0.046920333, w: 0.95307815}
+  m_LocalRotation: {x: 0.21059418, y: 0.2123483, z: -0.046920963, w: 0.9530775}
   m_LocalPosition: {x: -7.01, y: 4.32, z: -18.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 18.735, y: 10.478, z: 0}
+  m_LocalEulerAnglesHint: {x: 24.92, y: 25.121, z: 0}
 --- !u!20 &4923900619231589508
 Camera:
   m_ObjectHideFlags: 0
@@ -47,9 +47,9 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 38.2, y: 25.59}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 20
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -57,8 +57,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  far clip plane: 50
+  field of view: 64
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
