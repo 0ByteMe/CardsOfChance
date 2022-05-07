@@ -24,11 +24,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] [Range(0.01f, 3f)] float delayBeforeEnemyCardsStartToGetMoved;
     [Tooltip("Delay before the player can click Draw after all battles are completed.")]
     [SerializeField] [Range(0.01f, 3f)] public float delayToAllowDraw;
+
     [Space(20)]
+
     [SerializeField] Button drawCardsButton;
     [SerializeField] private Spline cameraSpline;
-    [SerializeField] Transform myCamera;
-    [SerializeField] GameObject startScreen;
+    [SerializeField] Transform myCamera;    
+    [SerializeField] Vector3 cameraStartPosition;
+    [SerializeField] float cameraStartTweenDuration;
+    [SerializeField] DisplayObject startScreenUI;
+    [SerializeField] DisplayObject battleScreenUI;
 
     bool canDrawCards;
 
@@ -44,20 +49,25 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        myCamera.transform.position = new Vector3(-0.008f, 5.681f, -25.52f);
-        //this sets the slowest's cards move duration to a variable
-        //Used to stop cards being added too quickly at the end of Drawing Player/Enemy Cards
-        CalculateLongestCardPlacementDuration();
+        myCamera.transform.position = cameraStartPosition;
+        startScreenUI.SetActive(true);        
 
+        CalculateLongestCardPlacementDuration();
         StopAbilityToDrawCards();
         StartCoroutine(AllowDrawingOfCards(delayToAllowDraw));
     }
     public void StartGame()
     {
-        Tween.Spline(cameraSpline, myCamera, 0, 1f, false, 5f, 0, Tween.EaseInOut, Tween.LoopType.None);        
-        startScreen.SetActive(false);
+        StartCoroutine(TweenCameraToBattleArea(cameraStartTweenDuration));        
     }
 
+    private IEnumerator TweenCameraToBattleArea(float duration)
+    {
+        Tween.Spline(cameraSpline, myCamera, 0, 1f, false, duration, 0, Tween.EaseInOut, Tween.LoopType.None);
+        startScreenUI.SetActive(false);
+        yield return new WaitForSeconds(duration);
+        battleScreenUI.SetActive(true);
+    }
     private void CalculateLongestCardPlacementDuration()
     {
         if (card1PlacementDuration > card2PlacementDuration && card1PlacementDuration > card3PlacementDuration)
@@ -85,8 +95,7 @@ public class GameManager : MonoBehaviour
         StopAbilityToDrawCards();
         yield return DrawPlayerCards(delayBeforeEnemyCardsStartToGetMoved);
         yield return DrawEnemyCards();
-        yield return cardBattler.CardBattle();
-        WinOrLoseGame();
+        yield return cardBattler.CardBattle();        
     }
 
     private IEnumerator DrawPlayerCards(float delayBeforeEnemyCardsArePlaced)
@@ -130,8 +139,10 @@ public class GameManager : MonoBehaviour
         drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
         drawCardsButton.enabled = false;
     }
-    private void WinOrLoseGame()
+    public void WinOrLoseGame()
     {
+        print("win lose started");
+
         if(scoreManager.PlayerScore == scoreManager.EnemyScore)
         {
             //ShowTieGameSequence();
@@ -144,8 +155,5 @@ public class GameManager : MonoBehaviour
         {
             //ShowLoseGameSequence();
         }
-
-
-
     }
 }

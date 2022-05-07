@@ -36,7 +36,7 @@ public class CardBattler : MonoBehaviour
 
     private int randomNumber;
     private int lastNumber;
-    Vector3 rotationAmount = new Vector3(0, 0, -180);
+    Vector3 cardRotationAmount = new Vector3(0, 0, -180);
 
     Vector3 targetSpriteRotationAmount = new Vector3(-90, 0, 0);
     Vector3 targetNameTextRotationAmount = new Vector3(-90, 0, 0);
@@ -102,7 +102,6 @@ public class CardBattler : MonoBehaviour
             StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[0]));            
         }
     }
-
     private IEnumerator BattleSecondCards()
     {
         Tween.Spline(cameraSpline, myCamera, .3f, .6f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
@@ -141,7 +140,6 @@ public class CardBattler : MonoBehaviour
             StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[1]));
         }
     }
-
     private IEnumerator BattleThirdCards()
     {
         Tween.Spline(cameraSpline, myCamera, .6f, 1f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
@@ -182,13 +180,17 @@ public class CardBattler : MonoBehaviour
 
         Tween.Spline(cameraSpline, myCamera, 1f, 0f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
 
-    }
+        if (cardDecks.shuffledPlayerCards.Count == 0 || cardDecks.shuffledEnemyCards.Count == 0)
+        {
+            gameManager.WinOrLoseGame();
+        }
 
+    }
     private IEnumerator RotateCards(Card card1, Card card2, float delay)
     {
         yield return new WaitForSeconds(delay);
-        Tween.Rotate(card1.transform, rotationAmount, Space.World, rotateDuration, 0, Tween.EaseInOutStrong);
-        Tween.Rotate(card2.transform, rotationAmount, Space.World, rotateDuration, 0, Tween.EaseInOutStrong);
+        Tween.Rotate(card1.transform, cardRotationAmount, Space.World, rotateDuration, 0, Tween.EaseInOutStrong);
+        Tween.Rotate(card2.transform, cardRotationAmount, Space.World, rotateDuration, 0, Tween.EaseInOutStrong);
     }
     private IEnumerator DelayThenRotateAllCardDetails(Card card1, Card card2, float delayBeforeRotating)
     {
