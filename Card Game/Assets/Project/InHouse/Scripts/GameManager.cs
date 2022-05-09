@@ -32,11 +32,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform myCamera;    
     [SerializeField] Vector3 cameraStartPosition;
     [SerializeField] float cameraStartTweenDuration;
-    [SerializeField] DisplayObject startScreenUI;
-    [SerializeField] DisplayObject battleScreenUI;
-    [SerializeField] DisplayObject gameOverWinUI;
-    [SerializeField] DisplayObject gameOverLoseUI;
-    [SerializeField] DisplayObject gameOverTieUI;
+    [SerializeField] DisplayObject startGameUI;
+    [SerializeField] DisplayObject scoreUI;
+    [SerializeField] DisplayObject drawCardsButtonUI;
+    [SerializeField] DisplayObject gameOverUI;
+    [SerializeField] GameObject playAgainButton;
+
 
     bool canDrawCards;
 
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         myCamera.transform.position = cameraStartPosition;
-        startScreenUI.SetActive(true);        
+        startGameUI.SetActive(true);        
 
         CalculateLongestCardPlacementDuration();
         StopAbilityToDrawCards();
@@ -63,13 +64,13 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(TweenCameraToBattleArea(cameraStartTweenDuration));        
     }
-
     private IEnumerator TweenCameraToBattleArea(float duration)
     {
         Tween.Spline(cameraSpline, myCamera, 0, 1f, false, duration, 0, Tween.EaseInOut, Tween.LoopType.None);
-        startScreenUI.SetActive(false);
+        startGameUI.SetActive(false);
         yield return new WaitForSeconds(duration);
-        battleScreenUI.SetActive(true);
+        drawCardsButtonUI.SetActive(true);
+        scoreUI.SetActive(true);
     }
     private void CalculateLongestCardPlacementDuration()
     {
@@ -142,19 +143,24 @@ public class GameManager : MonoBehaviour
         drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
         drawCardsButton.enabled = false;
     }
-    public void WinOrLoseGame()
+    public IEnumerator WinOrLoseGame()
     {
+        yield return cardBattler.Delay(2f);
+
         if(scoreManager.PlayerScore == scoreManager.EnemyScore)
         {
-            gameOverTieUI.SetActive(true);            
+            drawCardsButtonUI.SetActive(false);
+            gameOverUI.SetActive(true);            
         }
         else if(scoreManager.PlayerScore > scoreManager.EnemyScore)
         {
-            gameOverWinUI.SetActive(true);            
+            drawCardsButtonUI.SetActive(false);
+            gameOverUI.SetActive(true);            
         }
         else
         {
-            gameOverLoseUI.SetActive(true);            
+            drawCardsButtonUI.SetActive(false);
+            gameOverUI.SetActive(true);            
         }
     }
 
@@ -165,7 +171,8 @@ public class GameManager : MonoBehaviour
 
     private void NewGame()
     {
-        scoreManager.ResetScores();
+        scoreManager.ResetScores();        
+        cardDecks.ShuffleCardDecks();
     }
 
     public void QuitGame()

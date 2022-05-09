@@ -182,7 +182,7 @@ public class CardBattler : MonoBehaviour
 
         if (cardDecks.shuffledPlayerCards.Count == 0 || cardDecks.shuffledEnemyCards.Count == 0)
         {
-            gameManager.WinOrLoseGame();
+            yield return gameManager.WinOrLoseGame();
         }
 
     }
@@ -256,7 +256,7 @@ public class CardBattler : MonoBehaviour
         card.GetComponent<Rigidbody>().AddTorque(NewRandomNumberTorque(), 0, NewRandomNumberTorque(), ForceMode.Impulse);
         yield return null; 
     }    
-    private IEnumerator Delay(float delay)
+    public IEnumerator Delay(float delay)
     {
         yield return new WaitForSeconds(delay);
     }    

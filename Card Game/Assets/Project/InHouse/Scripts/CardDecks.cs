@@ -23,6 +23,7 @@ public class CardDecks : MonoBehaviour
         shuffledEnemyCards = new List<Card>();
         shuffledEnemyCards = enemyCards.OrderBy(x => Random.value).ToList();
     }
+
    public IEnumerator AddToCurrentBattleCards(List<Card> listToAddTo, Card card1, Card card2, Card card3, float delay)
     {
         listToAddTo.Add(card1);

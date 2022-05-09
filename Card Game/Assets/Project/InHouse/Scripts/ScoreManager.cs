@@ -48,6 +48,8 @@ public class ScoreManager : MonoBehaviour
     public void ResetScores()
     {
         playerScore = 0;
+        playerScoreText.text = playerScore.ToString();
         enemyScore = 0;
+        enemyScoreText.text = enemyScore.ToString();
     }
 }
