@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour
         get
         {
             return playerScore;
-        }
+        }        
     }
 
     public int EnemyScore
@@ -43,5 +43,11 @@ public class ScoreManager : MonoBehaviour
     {
         playerScore += 1;
         playerScoreText.text = playerScore.ToString();
+    }
+
+    public void ResetScores()
+    {
+        playerScore = 0;
+        enemyScore = 0;
     }
 }

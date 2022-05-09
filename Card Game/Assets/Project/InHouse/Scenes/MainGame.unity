@@ -801,6 +801,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1911687360}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cce5e1627025f0c45a3400725a381441, type: 3}
 --- !u!224 &39379372 stripped
@@ -3034,7 +3046,7 @@ Transform:
   - {fileID: 525018894}
   - {fileID: 1583624319}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &209984157 stripped
 Transform:
@@ -7107,6 +7119,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1911687360}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cce5e1627025f0c45a3400725a381441, type: 3}
 --- !u!4 &515102435 stripped
@@ -9570,7 +9594,7 @@ PrefabInstance:
       objectReference: {fileID: 1911687360}
     - target: {fileID: 7699499290966515525, guid: 36637b522e95a5847abfbdbd3c228e51, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: PlayAgain
       objectReference: {fileID: 0}
     - target: {fileID: 7699499290966515525, guid: 36637b522e95a5847abfbdbd3c228e51, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -9677,6 +9701,18 @@ PrefabInstance:
     - target: {fileID: 904898990201976774, guid: cce5e1627025f0c45a3400725a381441, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1911687360}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cce5e1627025f0c45a3400725a381441, type: 3}
@@ -11092,7 +11128,7 @@ PrefabInstance:
       objectReference: {fileID: 1911687360}
     - target: {fileID: 7699499290966515525, guid: 36637b522e95a5847abfbdbd3c228e51, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: PlayAgain
       objectReference: {fileID: 0}
     - target: {fileID: 7699499290966515525, guid: 36637b522e95a5847abfbdbd3c228e51, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -20340,7 +20376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7699499290966515514, guid: 36637b522e95a5847abfbdbd3c228e51, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7699499290966515514, guid: 36637b522e95a5847abfbdbd3c228e51, type: 3}
       propertyPath: m_AnchorMax.x
@@ -20424,7 +20460,7 @@ PrefabInstance:
       objectReference: {fileID: 1911687360}
     - target: {fileID: 7699499290966515525, guid: 36637b522e95a5847abfbdbd3c228e51, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: PlayAgain
       objectReference: {fileID: 0}
     - target: {fileID: 7699499290966515525, guid: 36637b522e95a5847abfbdbd3c228e51, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -22888,7 +22924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 904898990201976774, guid: cce5e1627025f0c45a3400725a381441, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 904898990201976774, guid: cce5e1627025f0c45a3400725a381441, type: 3}
       propertyPath: m_AnchorMax.x
@@ -22961,6 +22997,18 @@ PrefabInstance:
     - target: {fileID: 904898990201976774, guid: cce5e1627025f0c45a3400725a381441, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1911687360}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 904898990201976775, guid: cce5e1627025f0c45a3400725a381441, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cce5e1627025f0c45a3400725a381441, type: 3}
@@ -23809,8 +23857,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1543130403}
-  - {fileID: 1855869557}
   - {fileID: 1675904787}
+  - {fileID: 1855869557}
   m_Father: {fileID: 6948878084416885357}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24968,7 +25016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7436134688600012696, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
       propertyPath: cameraStartTweenDuration
-      value: 2.24
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7436134688600012696, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
       propertyPath: delayBeforeEnemyCardsStartToGetMoved
@@ -24976,7 +25024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7436134688600012697, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7436134688600012697, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25035,20 +25083,44 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 525018893}
     - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
+      propertyPath: shakeDuration
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
+      propertyPath: rotateDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
       propertyPath: delayToTakingHit
-      value: 0.46
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
+      propertyPath: delayToRotatingCard
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
       propertyPath: delayToBothCardsHits
-      value: 0.42
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
       propertyPath: delayBetweenEachBattle
-      value: 0.38
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
+      propertyPath: rotateCardDetailsDuration
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
+      propertyPath: delayToRotatingCardDetails
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
       propertyPath: delayBeforeFirstBattleStarts
-      value: 0.31
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436134688600012700, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
+      propertyPath: delayToWinningCardStartToFall
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7436134688600012701, guid: 652cf911c255dc24492e63751c6e60e5, type: 3}
       propertyPath: enemyDeckLocation

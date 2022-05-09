@@ -157,4 +157,19 @@ public class GameManager : MonoBehaviour
             gameOverLoseUI.SetActive(true);            
         }
     }
+
+    public void PlayAgain()
+    {
+        NewGame();
+    }
+
+    private void NewGame()
+    {
+        scoreManager.ResetScores();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
