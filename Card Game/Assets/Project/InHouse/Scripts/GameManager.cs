@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] float cameraStartTweenDuration;
     [SerializeField] DisplayObject startScreenUI;
     [SerializeField] DisplayObject battleScreenUI;
+    [SerializeField] DisplayObject gameOverWinUI;
+    [SerializeField] DisplayObject gameOverLoseUI;
+    [SerializeField] DisplayObject gameOverTieUI;
 
     bool canDrawCards;
 
@@ -141,19 +144,17 @@ public class GameManager : MonoBehaviour
     }
     public void WinOrLoseGame()
     {
-        print("win lose started");
-
         if(scoreManager.PlayerScore == scoreManager.EnemyScore)
         {
-            //ShowTieGameSequence();
+            gameOverTieUI.SetActive(true);            
         }
         else if(scoreManager.PlayerScore > scoreManager.EnemyScore)
         {
-            //ShowWinGameSequence();
+            gameOverWinUI.SetActive(true);            
         }
         else
         {
-            //ShowLoseGameSequence();
+            gameOverLoseUI.SetActive(true);            
         }
     }
 }
