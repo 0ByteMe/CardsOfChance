@@ -17,8 +17,8 @@ public class CardBattler : MonoBehaviour
     [SerializeField] [Range(0.1f, 3f)] float delayToRotatingCard;
     [SerializeField] [Range(0.1f, 3f)] float rotateDuration;
     [Tooltip("Delay before rotating Sprite + Number + Name.")] 
-    [SerializeField] [Range(0.01f, 3f)] float delayToRotatingCardDetails;
-    [SerializeField] [Range(0.01f, 3f)] float rotateCardDetailsDuration;
+    [SerializeField] [Range(0.1f, 3f)] float delayToRotatingCardDetails;
+    [SerializeField] [Range(0.1f, 3f)] float rotateCardDetailsDuration;
     [Tooltip("Delay before playing hit animation + VFX.")] 
     [SerializeField] [Range(0.1f, 3f)] float delayToTakingHit;
     [Tooltip("Delay before both cards taking a hit if its a draw.")] 
@@ -33,6 +33,8 @@ public class CardBattler : MonoBehaviour
 
     [SerializeField] private Spline cameraSpline;
     [SerializeField] Transform myCamera;
+    
+
 
     private int randomNumber;
     private int lastNumber;
@@ -57,18 +59,19 @@ public class CardBattler : MonoBehaviour
     }   
     public IEnumerator CardBattle()
     {
-       yield return new WaitForSeconds(delayBeforeFirstBattleStarts);
+       yield return new WaitForSeconds(delayBetweenEachBattle + 0.5f);
        yield return BattleFirstCards();        
        yield return BattleSecondCards();        
        yield return BattleThirdCards();
        yield return cardDecks.RemoveCardsFromDeck(cardDecks.playerBattleCards);
        yield return cardDecks.RemoveCardsFromDeck(cardDecks.enemyBattleCards);
-       yield return gameManager.AllowDrawingOfCards(gameManager.delayToAllowDraw);       
+       yield return gameManager.AllowDrawingOfCards(gameManager.delayToAllowDraw + .5f);       
+       gameManager.DrawCards();        
     }
 
     private IEnumerator BattleFirstCards()
     {
-        Tween.Spline(cameraSpline, myCamera, 0, .3f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
+        Tween.Spline(cameraSpline, myCamera, 0, .3f, true, delayBetweenEachBattle, 0, Tween.EaseInOut, Tween.LoopType.None);
 
         yield return RotateCards(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], delayToRotatingCard);        
         
@@ -104,7 +107,7 @@ public class CardBattler : MonoBehaviour
     }
     private IEnumerator BattleSecondCards()
     {
-        Tween.Spline(cameraSpline, myCamera, .3f, .6f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
+        Tween.Spline(cameraSpline, myCamera, .3f, .6f, true, delayBetweenEachBattle, 0, Tween.EaseInOut, Tween.LoopType.None);
 
         yield return DelayBetweenBattle(delayBetweenEachBattle);
 
@@ -142,7 +145,7 @@ public class CardBattler : MonoBehaviour
     }
     private IEnumerator BattleThirdCards()
     {
-        Tween.Spline(cameraSpline, myCamera, .6f, 1f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
+        Tween.Spline(cameraSpline, myCamera, .6f, 1f, true, delayBetweenEachBattle, 0, Tween.EaseInOut, Tween.LoopType.None);
 
         yield return DelayBetweenBattle(delayBetweenEachBattle);
 
@@ -178,12 +181,12 @@ public class CardBattler : MonoBehaviour
             StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[2]));
         }
 
-        Tween.Spline(cameraSpline, myCamera, 1f, 0f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
+        Tween.Spline(cameraSpline, myCamera, 1f, 0f, true, delayBetweenEachBattle, 0, Tween.EaseInOut, Tween.LoopType.None);
 
         if (cardDecks.shuffledPlayerCards.Count == 0 || cardDecks.shuffledEnemyCards.Count == 0)
         {
             StartCoroutine(gameManager.WinOrLoseGame());
-        }
+        }       
 
     }
     private IEnumerator RotateCards(Card card1, Card card2, float delay)

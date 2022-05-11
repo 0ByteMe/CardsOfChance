@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9154671569925940038, guid: b121188914f7825419e0db794a797dc3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.53
+      value: 2.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b121188914f7825419e0db794a797dc3, type: 3}
@@ -144,6 +144,14 @@ PrefabInstance:
     - target: {fileID: 1122053089348008, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
       propertyPath: m_Name
       value: Blacksmith
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294157444573142, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319835027473134, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4352909488338054, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
       propertyPath: m_RootOrder
@@ -199,6 +207,74 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4352909488338054, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212083220950423904, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212088803197080476, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212099748596122334, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212231698666098502, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212430823874072828, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212581193485753396, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212581193485753396, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212586224508543928, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212608046078279740, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212620248740145902, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212769473268700932, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212769473268700932, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212833307726789686, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212837068603369532, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212870746544890322, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212871506166237252, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212885404588621362, guid: 0ccdc414681c75045bf75f3ebf9e57c9, type: 3}
+      propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

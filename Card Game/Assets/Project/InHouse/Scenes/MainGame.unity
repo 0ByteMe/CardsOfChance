@@ -5918,7 +5918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 698486611576444585, guid: 3355a9f07e0414e47bcd0d4cc5e61789, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4664132347364306472, guid: 3355a9f07e0414e47bcd0d4cc5e61789, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26233,17 +26233,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: In the 'Timing' section below, each option is going to happen in succession,
     finishing before the next can start.
-  delayBeforeFirstBattleStarts: 0.1
-  delayBetweenEachBattle: 0.1
-  delayToRotatingCard: 0.1
-  rotateDuration: 0.1
-  delayToRotatingCardDetails: 0.01
-  rotateCardDetailsDuration: 0.01
-  delayToTakingHit: 0.1
-  delayToBothCardsHits: 0.1
-  delayToWinningCardStartToFall: 0.1
+  delayBeforeFirstBattleStarts: 0.5
+  delayBetweenEachBattle: 0.5
+  delayToRotatingCard: 0.3
+  rotateDuration: 0.3
+  delayToRotatingCardDetails: 0.1
+  rotateCardDetailsDuration: 0.3
+  delayToTakingHit: 0.5
+  delayToBothCardsHits: 0.5
+  delayToWinningCardStartToFall: 0.5
   shakeIntensity: {x: 0.1, y: 0.1, z: 0.1}
-  shakeDuration: 0.1
+  shakeDuration: 0.3
   shakeDelay: 0
   cameraSpline: {fileID: 525018893}
   myCamera: {fileID: 1583624319}
@@ -26281,11 +26281,11 @@ MonoBehaviour:
   enemyBattleCard2: {fileID: 1730753917}
   enemyBattleCard3: {fileID: 1535460071}
   longestCardPlacementDuration: 0
-  card1PlacementDuration: 0.05
-  card2PlacementDuration: 0.05
+  card1PlacementDuration: 0.39
+  card2PlacementDuration: 0.22
   card3PlacementDuration: 0.05
-  delayBeforeEnemyCardsStartToGetMoved: 0.01
-  delayToAllowDraw: 0.01
+  delayBeforeEnemyCardsStartToGetMoved: 0.1
+  delayToAllowDraw: 1.13
   drawCardsButton: {fileID: 6948878085801273631}
   cameraSpline: {fileID: 110655960}
   myCamera: {fileID: 1583624319}
