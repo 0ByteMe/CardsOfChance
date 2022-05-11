@@ -44,12 +44,15 @@ public class GameManager : MonoBehaviour
     ScoreManager scoreManager;
     CardDecks cardDecks;
     CardBattler cardBattler;
+    CardSpawner cardSpawner;
 
     private void Awake()
     {
         scoreManager = GetComponent<ScoreManager>();
         cardDecks = GetComponent<CardDecks>();
         cardBattler = GetComponent<CardBattler>();
+        cardSpawner = GetComponent<CardSpawner>();
+
     }
     private void Start()
     {
@@ -101,7 +104,6 @@ public class GameManager : MonoBehaviour
         yield return DrawEnemyCards();
         yield return cardBattler.CardBattle();        
     }
-
     private IEnumerator DrawPlayerCards(float delayBeforeEnemyCardsArePlaced)
     {
         //Moves card of Shuffled List to Card Battle Position
@@ -111,6 +113,7 @@ public class GameManager : MonoBehaviour
 
         yield return cardDecks.AddToCurrentBattleCards(cardDecks.playerBattleCards, cardDecks.shuffledPlayerCards[0], cardDecks.shuffledPlayerCards[1], cardDecks.shuffledPlayerCards[2], longestCardPlacementDuration);
         yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledPlayerCards);
+        yield return cardDecks.RemoveCardsFromDeck(cardDecks.playerCards);
         yield return new WaitForSeconds(delayBeforeEnemyCardsArePlaced);
     }
     private IEnumerator DrawEnemyCards()
@@ -121,6 +124,7 @@ public class GameManager : MonoBehaviour
 
         yield return cardDecks.AddToCurrentBattleCards(cardDecks.enemyBattleCards, cardDecks.shuffledEnemyCards[0], cardDecks.shuffledEnemyCards[1], cardDecks.shuffledEnemyCards[2], longestCardPlacementDuration);
         yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards);
+        yield return cardDecks.RemoveCardsFromDeck(cardDecks.enemyCards);
     }
     public IEnumerator AllowDrawingOfCards(float delay)
     {
@@ -145,34 +149,42 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator WinOrLoseGame()
     {
-        yield return cardBattler.Delay(2f);
+        drawCardsButtonUI.SetActive(false);
+        yield return cardBattler.Delay(1f);
 
         if(scoreManager.PlayerScore == scoreManager.EnemyScore)
         {
             drawCardsButtonUI.SetActive(false);
+            gameOverUI.GetComponentInChildren<TextMeshProUGUI>().text = "Its a Tie!";
             gameOverUI.SetActive(true);            
         }
         else if(scoreManager.PlayerScore > scoreManager.EnemyScore)
         {
             drawCardsButtonUI.SetActive(false);
+            gameOverUI.GetComponentInChildren<TextMeshProUGUI>().text = "You Win!";
             gameOverUI.SetActive(true);            
         }
         else
         {
             drawCardsButtonUI.SetActive(false);
+            gameOverUI.GetComponentInChildren<TextMeshProUGUI>().text = "You Lose!";
             gameOverUI.SetActive(true);            
         }
-    }
+        //TODO remove to sotp auto battle
+        PlayAgain();
+        yield return cardBattler.Delay(delayToAllowDraw + .1f);
+        DrawCards();
 
+    }    
     public void PlayAgain()
     {
-        NewGame();
-    }
-
-    private void NewGame()
-    {
-        scoreManager.ResetScores();        
+        scoreManager.ResetScores();
+        cardSpawner.InstantiateCardDecks();
         cardDecks.ShuffleCardDecks();
+        gameOverUI.SetActive(false);
+        drawCardsButtonUI.SetActive(true);
+        StopAbilityToDrawCards();
+        StartCoroutine(AllowDrawingOfCards(delayToAllowDraw));
     }
 
     public void QuitGame()

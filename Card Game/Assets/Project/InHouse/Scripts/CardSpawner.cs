@@ -27,7 +27,7 @@ public class CardSpawner : MonoBehaviour
         //proceeds to shuffle them into a new shuffled deck
         cardDecks.ShuffleCardDecks();
     }    
-    private void InstantiateCardDecks()
+    public void InstantiateCardDecks()
     {
         foreach (Card prefab in playerCardPrefabs)
         {

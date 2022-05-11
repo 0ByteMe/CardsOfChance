@@ -182,7 +182,7 @@ public class CardBattler : MonoBehaviour
 
         if (cardDecks.shuffledPlayerCards.Count == 0 || cardDecks.shuffledEnemyCards.Count == 0)
         {
-            yield return gameManager.WinOrLoseGame();
+            StartCoroutine(gameManager.WinOrLoseGame());
         }
 
     }
