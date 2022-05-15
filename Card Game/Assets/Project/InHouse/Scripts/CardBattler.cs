@@ -91,7 +91,8 @@ public class CardBattler : MonoBehaviour
             //Nobody Wins Point
             yield return HitSequenceForNoWinner(cardDecks.playerBattleCards[0], cardDecks.enemyBattleCards[0], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay);
             StartCoroutine(StartCardFallingSequence(cardDecks.playerBattleCards[0]));
-            StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[0]));            
+            StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[0]));
+            yield return Delay(delayBetweenEachBattle);
         }
     }
     private IEnumerator BattleSecondCards()
@@ -130,6 +131,7 @@ public class CardBattler : MonoBehaviour
             yield return StartCoroutine(HitSequenceForNoWinner(cardDecks.playerBattleCards[1], cardDecks.enemyBattleCards[1], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay));
             StartCoroutine(StartCardFallingSequence(cardDecks.playerBattleCards[1]));
             StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[1]));
+            yield return Delay(delayBetweenEachBattle);
         }
     }
     private IEnumerator BattleThirdCards()
@@ -168,6 +170,7 @@ public class CardBattler : MonoBehaviour
             yield return StartCoroutine(HitSequenceForNoWinner(cardDecks.playerBattleCards[2], cardDecks.enemyBattleCards[2], delayToBothCardsHits, shakeIntensity, shakeDuration, shakeDelay));
             StartCoroutine(StartCardFallingSequence(cardDecks.playerBattleCards[2]));
             StartCoroutine(StartCardFallingSequence(cardDecks.enemyBattleCards[2]));
+            yield return Delay(delayBetweenEachBattle);
         }
 
         Tween.Spline(cameraSpline, myCamera, .9f, 0f, true, 1f, 0, Tween.EaseInOut, Tween.LoopType.None);
