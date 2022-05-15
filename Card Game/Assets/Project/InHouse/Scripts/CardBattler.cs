@@ -25,7 +25,6 @@ public class CardBattler : MonoBehaviour
     [SerializeField] [Range(0.1f, 3f)] float delayToBothCardsHits;
     [SerializeField] [Range(0.1f, 3f)] float delayToWinningCardStartToFall;
 
-
     [Header("Hit Animation")]
     [SerializeField] Vector3 shakeIntensity;
     [SerializeField] [Range(0.1f, 2f)] float shakeDuration;
@@ -33,13 +32,11 @@ public class CardBattler : MonoBehaviour
 
     [SerializeField] private Spline cameraSpline;
     [SerializeField] Transform myCamera;
-    
-
 
     private int randomNumber;
     private int lastNumber;
-    Vector3 cardRotationAmount = new Vector3(0, 0, -180);
 
+    Vector3 cardRotationAmount = new Vector3(0, 0, -180);
     Vector3 targetSpriteRotationAmount = new Vector3(-90, 0, 0);
     Vector3 targetNameTextRotationAmount = new Vector3(-90, 0, 0);
     Vector3 targetStrengthTextRotationAmount = new Vector3(90, 0, 0);
@@ -50,12 +47,14 @@ public class CardBattler : MonoBehaviour
     CardDecks cardDecks;
     ScoreManager scoreManager;
     GameManager gameManager;
+    AudioManager audioManager;
 
     private void Awake()
     {
         cardDecks = GetComponent<CardDecks>();
         scoreManager = GetComponent<ScoreManager>();        
         gameManager = GetComponent<GameManager>();
+        audioManager = GetComponent<AudioManager>();
     }   
     public IEnumerator CardBattle()
     {
@@ -65,10 +64,8 @@ public class CardBattler : MonoBehaviour
        yield return BattleThirdCards();
        yield return cardDecks.RemoveCardsFromDeck(cardDecks.playerBattleCards);
        yield return cardDecks.RemoveCardsFromDeck(cardDecks.enemyBattleCards);
-       yield return gameManager.AllowDrawingOfCards(gameManager.delayToAllowDraw + .5f);       
-       gameManager.DrawCards();        
+       yield return gameManager.AllowDrawingOfCards(gameManager.delayToAllowDraw + .5f);              
     }
-
     private IEnumerator BattleFirstCards()
     {
         Tween.Spline(cameraSpline, myCamera, 0, .3f, true, delayBetweenEachBattle, 0, Tween.EaseInOut, Tween.LoopType.None);
@@ -194,6 +191,7 @@ public class CardBattler : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Tween.Rotate(card1.transform, cardRotationAmount, Space.World, rotateDuration, 0, Tween.EaseInOutStrong);
         Tween.Rotate(card2.transform, cardRotationAmount, Space.World, rotateDuration, 0, Tween.EaseInOutStrong);
+        audioManager.PlayFlipCardSFX();
     }
     private IEnumerator DelayThenRotateAllCardDetails(Card card1, Card card2, float delayBeforeRotating)
     {
@@ -227,6 +225,7 @@ public class CardBattler : MonoBehaviour
         yield return new WaitForSeconds(delay);
         card.transform.GetChild(3).gameObject.SetActive(true);
         Tween.Shake(card.transform, card.transform.position, shakeIntensity, shakeDuration, shakeDelay, Tween.LoopType.None);
+        audioManager.PlayCardAttackedSFX();
         yield return new WaitForSeconds(shakeDuration);
     }  
     private IEnumerator HitSequenceForNoWinner(Card card1, Card card2, float delayToBothCardsHits, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)
@@ -236,23 +235,21 @@ public class CardBattler : MonoBehaviour
         Tween.Shake(card1.transform, card1.transform.position, shakeIntensity, shakeDuration, shakeDelay);
         card2.transform.GetChild(3).gameObject.SetActive(true);
         Tween.Shake(card2.transform, card2.transform.position, shakeIntensity, shakeDuration, shakeDelay);
+        audioManager.PlayCardAttackedSFX();
         yield return new WaitForSeconds(shakeDuration);
     }    
     private IEnumerator StartCardFallingSequence(Card card)
-    {
-        //rotate all the cards details back down
-        yield return RotateAllCardDetailsBackDown(card);
-        yield return Delay(rotateCardDetailsDuration);
-        // play smoke VFX
+    {       
+        yield return RotateAllCardDetailsBackDown(card);       
+        audioManager.PlaycardPoofSFX();        
+        yield return Delay(rotateCardDetailsDuration);        
         card.transform.GetChild(4).gameObject.SetActive(true);
         card.transform.GetChild(5).gameObject.SetActive(true);
-        card.transform.GetChild(6).gameObject.SetActive(true);
-        // make details dissapear
+        card.transform.GetChild(6).gameObject.SetActive(true);        
         card.transform.GetChild(1).gameObject.SetActive(false);
         card.transform.GetChild(2).gameObject.SetActive(false);
         card.transform.GetChild(7).gameObject.SetActive(false);
         yield return Delay(rotateCardDetailsDuration);
-        //add randomized force to fling card
         card.gameObject.AddComponent<BoxCollider>().size = new Vector3(2, 3.5f, 0.05f);
         card.gameObject.AddComponent<Rigidbody>();        
         card.GetComponent<Rigidbody>().AddForce(NewRandomNumberForce(), 0, NewRandomNumberForce(), ForceMode.Impulse);

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using DigitalRuby.Tween;
 using Pixelplacement;
 using UnityEngine.UI;
 using TMPro;
@@ -15,29 +14,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform enemyBattleCard2;
     [SerializeField] Transform enemyBattleCard3;
     [Header("Timing")]
-    public float longestCardPlacementDuration;
-    [SerializeField] [Range(0.05f, 3f)] float card1PlacementDuration;
-    [SerializeField] [Range(0.05f, 3f)] float card2PlacementDuration;
-    [SerializeField] [Range(0.05f, 3f)] public float card3PlacementDuration;
+    [SerializeField] [Range(0.05f, 3f)] float cardPlacementDuration;    
     [Space(20)]
     [Tooltip("Delay before enemy cards can start to move after all 3 of the player's are placed.")]
     [SerializeField] [Range(0.01f, 3f)] float delayBeforeEnemyCardsStartToGetMoved;
     [Tooltip("Delay before the player can click Draw after all battles are completed.")]
     [SerializeField] [Range(0.01f, 3f)] public float delayToAllowDraw;
-
-    [Space(20)]
-
-    [SerializeField] Button drawCardsButton;
+    [Space(20)]    
     [SerializeField] private Spline cameraSpline;
     [SerializeField] Transform myCamera;    
     [SerializeField] Vector3 cameraStartPosition;
-    [SerializeField] float cameraStartTweenDuration;
-    [SerializeField] DisplayObject startGameUI;
-    [SerializeField] DisplayObject scoreUI;
-    [SerializeField] DisplayObject drawCardsButtonUI;
-    [SerializeField] DisplayObject gameOverUI;
-    [SerializeField] GameObject playAgainButton;
-
+    [SerializeField] float cameraStartTweenDuration;  
 
     bool canDrawCards;
 
@@ -45,57 +32,63 @@ public class GameManager : MonoBehaviour
     CardDecks cardDecks;
     CardBattler cardBattler;
     CardSpawner cardSpawner;
+    AudioManager audioManager;
+    UIManager uiManager;
 
     private void Awake()
     {
         scoreManager = GetComponent<ScoreManager>();
         cardDecks = GetComponent<CardDecks>();
         cardBattler = GetComponent<CardBattler>();
-        cardSpawner = GetComponent<CardSpawner>();
-
+        cardSpawner = GetComponent<CardSpawner>();       
+        audioManager = GetComponent<AudioManager>();
+        uiManager = GetComponent<UIManager>();
     }
     private void Start()
     {
         myCamera.transform.position = cameraStartPosition;
-        startGameUI.SetActive(true);        
+        uiManager.startGameUI.SetActive(true);        
 
-        CalculateLongestCardPlacementDuration();
         StopAbilityToDrawCards();
         StartCoroutine(AllowDrawingOfCards(delayToAllowDraw));
     }
     public void StartGame()
     {
         StartCoroutine(TweenCameraToBattleArea(cameraStartTweenDuration));        
-    }
-    private IEnumerator TweenCameraToBattleArea(float duration)
-    {
-        Tween.Spline(cameraSpline, myCamera, 0, 1f, false, duration, 0, Tween.EaseInOut, Tween.LoopType.None);
-        startGameUI.SetActive(false);
-        yield return new WaitForSeconds(duration);
-        drawCardsButtonUI.SetActive(true);
-        scoreUI.SetActive(true);
-    }
-    private void CalculateLongestCardPlacementDuration()
-    {
-        if (card1PlacementDuration > card2PlacementDuration && card1PlacementDuration > card3PlacementDuration)
-        {
-            longestCardPlacementDuration = card1PlacementDuration;
-        }
-        else if (card2PlacementDuration > card1PlacementDuration && card2PlacementDuration > card3PlacementDuration)
-        {
-            longestCardPlacementDuration = card2PlacementDuration;
-        }
-        else
-        {
-            longestCardPlacementDuration = card3PlacementDuration;
-        }
-    }
+    }    
     public void DrawCards()
     {
         if (canDrawCards)
         {
             StartCoroutine(DrawCardSequence());
         }
+    }
+    public void StopAbilityToDrawCards()
+    {
+        canDrawCards = false;
+        uiManager.DisableDrawButton();
+    }   
+    public void PlayAgain()
+    {
+        scoreManager.ResetScores();
+        cardSpawner.InstantiateCardDecks();
+        cardDecks.ShuffleCardDecks();
+        uiManager.gameOverUI.SetActive(false);
+        uiManager.drawCardsButtonUI.SetActive(true);
+        StopAbilityToDrawCards();
+        StartCoroutine(AllowDrawingOfCards(delayToAllowDraw));
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    private IEnumerator TweenCameraToBattleArea(float duration)
+    {
+        Tween.Spline(cameraSpline, myCamera, 0, 1f, false, duration, 0, Tween.EaseInOut, Tween.LoopType.None);
+        uiManager.startGameUI.SetActive(false);
+        yield return new WaitForSeconds(duration);
+        uiManager.drawCardsButtonUI.SetActive(true);
+        uiManager.scoreUI.SetActive(true);
     }
     private IEnumerator DrawCardSequence()
     {
@@ -106,23 +99,28 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator DrawPlayerCards(float delayBeforeEnemyCardsArePlaced)
     {
-        //Moves card of Shuffled List to Card Battle Position
-        Tween.Position(cardDecks.shuffledPlayerCards[0].transform, playerBattleCard1.position, card1PlacementDuration, 0);
-        Tween.Position(cardDecks.shuffledPlayerCards[1].transform, playerBattleCard2.position, card2PlacementDuration, 0);
-        Tween.Position(cardDecks.shuffledPlayerCards[2].transform, playerBattleCard3.position, card3PlacementDuration, 0);
+        yield return PlaceCardSFX();
+        yield return PlaceCard(cardDecks.shuffledPlayerCards[0], playerBattleCard1, cardPlacementDuration);
+        yield return PlaceCardSFX();
+        yield return PlaceCard(cardDecks.shuffledPlayerCards[1], playerBattleCard2, cardPlacementDuration);
+        yield return PlaceCardSFX();
+        yield return PlaceCard(cardDecks.shuffledPlayerCards[2], playerBattleCard3, cardPlacementDuration);
 
-        yield return cardDecks.AddToCurrentBattleCards(cardDecks.playerBattleCards, cardDecks.shuffledPlayerCards[0], cardDecks.shuffledPlayerCards[1], cardDecks.shuffledPlayerCards[2], longestCardPlacementDuration);
+        yield return cardDecks.AddToCurrentBattleCards(cardDecks.playerBattleCards, cardDecks.shuffledPlayerCards[0], cardDecks.shuffledPlayerCards[1], cardDecks.shuffledPlayerCards[2], cardPlacementDuration);
         yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledPlayerCards);
         yield return cardDecks.RemoveCardsFromDeck(cardDecks.playerCards);
         yield return new WaitForSeconds(delayBeforeEnemyCardsArePlaced);
     }
     private IEnumerator DrawEnemyCards()
     {
-        Tween.Position(cardDecks.shuffledEnemyCards[0].transform, enemyBattleCard1.position, card1PlacementDuration, 0);
-        Tween.Position(cardDecks.shuffledEnemyCards[1].transform, enemyBattleCard2.position, card2PlacementDuration, 0);
-        Tween.Position(cardDecks.shuffledEnemyCards[2].transform, enemyBattleCard3.position, card3PlacementDuration, 0);
+        yield return PlaceCardSFX();
+        yield return PlaceCard(cardDecks.shuffledEnemyCards[0], enemyBattleCard1, cardPlacementDuration);
+        yield return PlaceCardSFX();
+        yield return PlaceCard(cardDecks.shuffledEnemyCards[1], enemyBattleCard2, cardPlacementDuration);
+        yield return PlaceCardSFX();
+        yield return PlaceCard(cardDecks.shuffledEnemyCards[2], enemyBattleCard3, cardPlacementDuration);
 
-        yield return cardDecks.AddToCurrentBattleCards(cardDecks.enemyBattleCards, cardDecks.shuffledEnemyCards[0], cardDecks.shuffledEnemyCards[1], cardDecks.shuffledEnemyCards[2], longestCardPlacementDuration);
+        yield return cardDecks.AddToCurrentBattleCards(cardDecks.enemyBattleCards, cardDecks.shuffledEnemyCards[0], cardDecks.shuffledEnemyCards[1], cardDecks.shuffledEnemyCards[2], cardPlacementDuration);
         yield return cardDecks.RemoveCardsFromDeck(cardDecks.shuffledEnemyCards);
         yield return cardDecks.RemoveCardsFromDeck(cardDecks.enemyCards);
     }
@@ -130,65 +128,45 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         canDrawCards = true;
-        EnableDrawButton();
-    }
-    public void StopAbilityToDrawCards()
-    {
-        canDrawCards = false;
-        DisableDrawButton();
-    }
-    public void EnableDrawButton()
-    {
-        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
-        drawCardsButton.enabled = true;
-    }
-    private void DisableDrawButton()
-    {
-        drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-        drawCardsButton.enabled = false;
+        uiManager.EnableDrawButton();
     }
     public IEnumerator WinOrLoseGame()
     {
-        drawCardsButtonUI.SetActive(false);
+        uiManager.drawCardsButtonUI.SetActive(false);
         yield return cardBattler.Delay(1f);
 
         if(scoreManager.PlayerScore == scoreManager.EnemyScore)
         {
-            drawCardsButtonUI.SetActive(false);
-            gameOverUI.GetComponentInChildren<TextMeshProUGUI>().text = "Its a Tie!";
-            gameOverUI.SetActive(true);            
+            uiManager.drawCardsButtonUI.SetActive(false);
+            uiManager.gameOverUI.GetComponentInChildren<TextMeshProUGUI>().text = "Its a Tie!";
+            uiManager.gameOverUI.SetActive(true);
+            audioManager.PlayGameOverTieSFX();
         }
         else if(scoreManager.PlayerScore > scoreManager.EnemyScore)
         {
-            drawCardsButtonUI.SetActive(false);
-            gameOverUI.GetComponentInChildren<TextMeshProUGUI>().text = "You Win!";
-            gameOverUI.SetActive(true);            
+            uiManager.drawCardsButtonUI.SetActive(false);
+            uiManager.gameOverUI.GetComponentInChildren<TextMeshProUGUI>().text = "You Win!";
+            uiManager.gameOverUI.SetActive(true);    
+            audioManager.PlayGameOverWinSFX();
         }
         else
         {
-            drawCardsButtonUI.SetActive(false);
-            gameOverUI.GetComponentInChildren<TextMeshProUGUI>().text = "You Lose!";
-            gameOverUI.SetActive(true);            
+            uiManager.drawCardsButtonUI.SetActive(false);
+            uiManager.gameOverUI.GetComponentInChildren<TextMeshProUGUI>().text = "You Lose!";
+            uiManager.gameOverUI.SetActive(true);  
+            audioManager.PlayGameOverLoseSFX();
         }
-        //TODO remove to sotp auto battle
-        PlayAgain();
-        yield return cardBattler.Delay(delayToAllowDraw + .1f);
-        DrawCards();
-
-    }    
-    public void PlayAgain()
+    }
+    private IEnumerator PlaceCard(Card card, Transform position, float placementDuration)
     {
-        scoreManager.ResetScores();
-        cardSpawner.InstantiateCardDecks();
-        cardDecks.ShuffleCardDecks();
-        gameOverUI.SetActive(false);
-        drawCardsButtonUI.SetActive(true);
-        StopAbilityToDrawCards();
-        StartCoroutine(AllowDrawingOfCards(delayToAllowDraw));
+        Tween.Position(card.transform, position.position, placementDuration, 0);
+        yield return new WaitForSeconds(placementDuration);
+    }
+    private IEnumerator PlaceCardSFX()
+    {
+        audioManager.PlayPlaceCardsSFX();
+        yield return null;
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+   
 }
