@@ -194,14 +194,14 @@ public class CardBattler : MonoBehaviour
     private IEnumerator DelayThenRotateAllCardDetails(Card card1, Card card2, float delayBeforeRotating)
     {
         yield return new WaitForSeconds(delayBeforeRotating);
-        card1.transform.GetChild(7).gameObject.SetActive(true);
+        card1.transform.GetChild(6).gameObject.SetActive(true);
         Tween.Rotate(card1.transform.GetChild(1), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
         Tween.Rotate(card1.transform.GetChild(2), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
-        Tween.Rotate(card1.transform.GetChild(7), new Vector3(90,0,0), Space.Self, rotateCardDetailsDuration, 0);
-        card2.transform.GetChild(7).gameObject.SetActive(true);
+        Tween.Rotate(card1.transform.GetChild(6), new Vector3(90,0,0), Space.Self, rotateCardDetailsDuration, 0);
+        card2.transform.GetChild(6).gameObject.SetActive(true);
         Tween.Rotate(card2.transform.GetChild(1), targetNameTextRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
         Tween.Rotate(card2.transform.GetChild(2), targetSpriteRotationAmount, Space.Self, rotateCardDetailsDuration, 0);
-        Tween.Rotate(card2.transform.GetChild(7), new Vector3(90, 0, 0), Space.Self, rotateCardDetailsDuration, 0);
+        Tween.Rotate(card2.transform.GetChild(6), new Vector3(90, 0, 0), Space.Self, rotateCardDetailsDuration, 0);
     }
     private IEnumerator DelayThenShowCardStrengthPlayVFX(Card card1, Card card2, float delay)
     {
@@ -215,7 +215,7 @@ public class CardBattler : MonoBehaviour
     {        
         Tween.Rotate(card1.transform.GetChild(1), targetNameTextRotationReturn, Space.Self, rotateCardDetailsDownDuration, 0);
         Tween.Rotate(card1.transform.GetChild(2), targetSpriteRotationReturn, Space.Self, rotateCardDetailsDownDuration, 0);
-        Tween.Rotate(card1.transform.GetChild(7), new Vector3(-90, 0, 0), Space.Self, rotateCardDetailsDownDuration, 0);
+        Tween.Rotate(card1.transform.GetChild(6), new Vector3(-90, 0, 0), Space.Self, rotateCardDetailsDownDuration, 0);
         yield return null;
     }
     private IEnumerator HitSequence(Card card, float delay, Vector3 shakeIntensity, float shakeDuration, float shakeDelay)
@@ -243,10 +243,9 @@ public class CardBattler : MonoBehaviour
         yield return Delay(rotateCardDetailsDownDuration);        
         card.transform.GetChild(4).gameObject.SetActive(true);
         card.transform.GetChild(5).gameObject.SetActive(true);
-        card.transform.GetChild(6).gameObject.SetActive(true);        
         card.transform.GetChild(1).gameObject.SetActive(false);
         card.transform.GetChild(2).gameObject.SetActive(false);
-        card.transform.GetChild(7).gameObject.SetActive(false);
+        card.transform.GetChild(6).gameObject.SetActive(false);
         yield return Delay(rotateCardDetailsDuration);
         card.gameObject.AddComponent<BoxCollider>().size = new Vector3(2, 3.5f, 0.05f);
         card.gameObject.AddComponent<Rigidbody>();        

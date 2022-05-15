@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator TweenCameraToBattleArea(float duration)
     {
-        Tween.Spline(cameraSpline, myCamera, 0, 1f, false, duration, 0, Tween.EaseInOut, Tween.LoopType.None);
+        Tween.Spline(cameraSpline, myCamera.transform, 0, 1f, false, duration, 0, Tween.EaseInOut, Tween.LoopType.None);
         uiManager.startGameUI.SetActive(false);
         yield return new WaitForSeconds(duration);
         uiManager.drawCardsButtonUI.SetActive(true);
