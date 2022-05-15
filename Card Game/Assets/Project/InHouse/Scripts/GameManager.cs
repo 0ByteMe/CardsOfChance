@@ -15,10 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform enemyBattleCard3;
     [Header("Timing")]
     [SerializeField] [Range(0.05f, 3f)] float cardPlacementDuration;    
-    [Space(20)]
-    [Tooltip("Delay before enemy cards can start to move after all 3 of the player's are placed.")]
-    [SerializeField] [Range(0.01f, 3f)] float delayBeforeEnemyCardsStartToGetMoved;
-    [Tooltip("Delay before the player can click Draw after all battles are completed.")]
+    [SerializeField] [Range(0.01f, 3f)] float delayBeforeEnemyCardsStartToGetMoved;    
     [SerializeField] [Range(0.01f, 3f)] public float delayToAllowDraw;
     [Space(20)]    
     [SerializeField] private Spline cameraSpline;

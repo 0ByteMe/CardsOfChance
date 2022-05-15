@@ -14,6 +14,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] public DisplayObject drawCardsButtonUI;
     [SerializeField] public DisplayObject gameOverUI;
     [SerializeField] GameObject playAgainButton;
+    [SerializeField] public TextMeshProUGUI playerScoreText;
+    [SerializeField] public TextMeshProUGUI enemyScoreText;
+    [SerializeField] private GameObject scoreUpdateVFX;
+
+    public AnimationCurve myScoreTextCurve;
 
     public void EnableDrawButton()
     {
@@ -24,5 +29,10 @@ public class UIManager : MonoBehaviour
     {
         drawCardsButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
         drawCardsButton.enabled = false;
+    }
+    public void UpdateScoreUI(TextMeshProUGUI scoreUI, int score)
+    {
+        scoreUI.text = score.ToString();
+        Tween.LocalScale(scoreUI.transform, new Vector3(1.2f, 1.2f, 0), .5f, 0, myScoreTextCurve);
     }
 }
