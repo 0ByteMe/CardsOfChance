@@ -32,7 +32,6 @@ public class Card : MonoBehaviour
         {
             cardPlayerOrEnemyText.text = enemy;
             cardPlayerOrEnemyText.color = Color.red;
-
         }
     }
 
